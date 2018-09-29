@@ -1,0 +1,35 @@
+html,body,#app,.page-view{
+  background:#ddd;
+	height:100%;width:100%;overflow:hidden;position:relative;
+}
+
+.child-view {
+  position: absolute;
+  width:100%;
+  transition: all .8s cubic-bezier(.55,0,.1,1);
+}
+.slide-left-enter, .slide-right-leave-active {
+  opacity: 0;
+  -webkit-transform: translate(50px, 0);
+  transform: translate(50px, 0);
+}
+.slide-left-leave-active, .slide-right-enter {
+  opacity: 0;
+  -webkit-transform: translate(-50px, 0);
+  transform: translate(-50px, 0);
+}
+
+/* the footer tab bar */
+.tab-bar{
+	height:120px;width:100%;background:#fff;position:fixed;bottom:0;left:0;right:0;width:100%;
+  ul{display:flex;justify-content:space-around;align-items:center;height:100%;}
+  .tab-bar-item{padding:0 40px;text-align:center;color:#636363;}
+  .tab-bar-item.active{color:#24b8e4;}
+  .tab-bar-item_Text{display:block;}
+}
+
+/* home */
+.home{
+  height:100%;background:#111;
+  p{color:#fff;}
+}
