@@ -13,7 +13,7 @@
 		name:'tabbar',
 		data (){
 			return {
-				isActive:this.$store.state.navIndex,
+				isActive:this.$store.state.tabIndex,
 				itemList:[
 					{id:1,text:"画报",icon:"fa fa-clipboard",link:'/'},
 					{id:2,text:"有物",icon:"fa fa-smile-o",link:'/things'},
@@ -29,7 +29,7 @@
 			addActive: function(index,item){
 				this.isActive = index;
 				this.$router.push(item.link);
-				this.$store.commit("changeNav",index);
+				this.$store.commit("changeTab",index);
 			}
 		}
 	};

@@ -20,12 +20,12 @@ export default new Router({
   routes: [
     {
       path:'',
-      name:'pageview',
+      name:'',
       component:pageView,
       children:[
         {
           path:'/',
-          name:'home',
+          name:'',
           component:Home,
           children:[
            {

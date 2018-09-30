@@ -5,11 +5,11 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	state:{
-		navIndex:0
+		tabIndex:0
 	},
 	mutations:{
-		changeNav: function(state,index){
-			state.navIndex = index;
+		changeTab: function(state,index){
+			state.tabIndex = index;
 		}
 	}
 });
