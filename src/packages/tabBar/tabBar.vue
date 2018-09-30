@@ -13,19 +13,23 @@
 		name:'tabbar',
 		data (){
 			return {
-				isActive:0,
+				isActive:this.$store.state.navIndex,
 				itemList:[
-					{id:1,text:"画报",icon:"fa fa-clipboard",link:'/home/'},
-					{id:2,text:"有物",icon:"fa fa-smile-o",link:'/home/things'},
-					{id:3,text:"设计师",icon:"fa fa-pencil",link:'/home/designer'},
-					{id:4,text:"我",icon:"fa fa-user-o",link:'/home/personal'}
+					{id:1,text:"画报",icon:"fa fa-clipboard",link:'/'},
+					{id:2,text:"有物",icon:"fa fa-smile-o",link:'/things'},
+					{id:3,text:"设计师",icon:"fa fa-pencil",link:'/designer'},
+					{id:4,text:"我",icon:"fa fa-user-o",link:'/personal'}
 				]
 			}
+		},
+		mounted(){
+			
 		},
 		methods:{
 			addActive: function(index,item){
 				this.isActive = index;
 				this.$router.push(item.link);
+				this.$store.commit("changeNav",index);
 			}
 		}
 	};

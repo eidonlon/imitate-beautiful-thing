@@ -1,15 +1,14 @@
 <template>
-	<div class="things">
+	<div class="pictoral">
 		<p>{{desc}}</p>
-		<tabbar></tabbar>
 	</div>
 </template>
 <script>
 	export default{
-		name: 'things',
+		name: 'pictoral',
 		data (){
 			return{
-				desc:'this is things page'
+				desc:'this is pictoral page'
 			}
 		}
 	};

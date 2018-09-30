@@ -1,7 +1,6 @@
 <template>
 	<div class="personal">
 		<p>{{desc}}</p>
-		<tabbar></tabbar>
 	</div>
 </template>
 <script>

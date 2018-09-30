@@ -14,10 +14,12 @@
 			}
 		},
 		mounted(){
-			console.log(this.$route);
+			console.log(this.$router)
+			console.log(this.$route)
 		},	
 		watch:{
 			$route: function(to,from){
+				console.log(to.meta.index);
 				let isBack = this.$router.isBack;
 				if(isBack){
 					this.transitionName = 'slide-right';
@@ -25,7 +27,6 @@
 					this.transitionName = 'slide-left';
 				}
 				this.$router.isBack = false;
-				console.log(this.$router.isBack)
 			}
 		}
 	}
