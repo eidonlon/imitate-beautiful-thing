@@ -10,6 +10,9 @@
 			return{
 				desc:'this is personal page'
 			}
-		}
+		},
+	    methods: {
+
+	    }
 	};
 </script>

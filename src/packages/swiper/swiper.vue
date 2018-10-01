@@ -1,22 +1,12 @@
 <template>
-	<div>
-		<div class="appnav">
-			<swiper :options="swiperOptionNav" ref="mainSwiper" class="swiper-nav">
-		   		<swiper-slide v-for="(item, index) in navList" 
-		    			  :key="index"
-		    			  >{{item.text}}
-		    			
-		    	</swiper-slide>
-			</swiper>
-		</div>
-		<div class="swiper-main">
-			<swiper :options="swiperOptionMain" ref="navSwiper" class="swiper-content">
-		        <swiper-slide v-for="(slide,index) in navList"
-		        			  :key="index"
-		        			  > {{ slide.text }}<!-- <slot name="swiperMain">{{item.text}}</slot>  --></swiper-slide>
-		    </swiper>
-		</div>
-		  
+	<div class="swiper-box">
+	  <swiper :options="swiperOption" ref="swiper" >
+	   		<swiper-slide v-for="(data, index) in dataList" 
+	    			  :key="index"
+	    			  >
+	    		 <slot name="swiperMain" :data="data">{{data.text}}</slot> 	
+	    	</swiper-slide>
+		</swiper>
 	</div>
 </template>
 <script>
@@ -25,7 +15,10 @@
 	export default{
 		name: 'appnav',
 		props:{
-			navList:{
+			swiperOption:{
+				type:Object
+			},
+			dataList:{
 				type:Array
 			}
 		},
@@ -36,35 +29,9 @@
 		data (){
 			return{
 				isActive:0,
-				swiperOptionMain: {
-				  loop:true,
-		          loopedSlides: 5
-		        },
-		        swiperOptionNav: {
-		          loop:true,
-		          slidesPerView: 4,
-		          loopedSlides: 5, 
-		          slideToClickedSlide: true,
-		          on:{
-		          	tap:this.changeNav
-		          }
-				}
 			}
-		},
-		mounted(){
-			this.$nextTick(() => {
-				const navSwiper = this.$refs.navSwiper.swiper
-		        const mainSwiper = this.$refs.mainSwiper.swiper
-		        navSwiper.controller.control = mainSwiper
-			});
 		},
 		methods:{
-			changeNav: function(){
-				console.log("click")
-				let index = this.$refs.navSwiper.swiper.clickedIndex;
-				this.isActive = index;
-				this.$emit('changeView',index);
-			}
 		}
 	};
 </script>

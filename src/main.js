@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
+import scroller from 'vue-scroller'
 
 import 'font-awesome/scss/font-awesome.scss'
 import './assets/style/reset.css'
@@ -13,6 +14,7 @@ import swiper from './packages/swiper'
 Vue.config.productionTip = false
 Vue.config.devtools = true
 
+Vue.use(scroller)
 Vue.use(tabbar)
 Vue.use(swiper)
 
