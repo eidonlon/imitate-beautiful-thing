@@ -18,9 +18,7 @@
 			swiperOption:{
 				type:Object
 			},
-			dataList:{
-				type:Array
-			}
+			dataList:{}
 		},
 		components:{
 			swiper,

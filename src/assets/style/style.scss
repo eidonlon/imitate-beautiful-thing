@@ -4,6 +4,8 @@ html,body,#app,.page-view{
 	height:100%;width:100%;overflow:hidden;position:relative;
   color:#fff;
 }
+.fl{float:left;}
+.fr{float:right;}
 
 .child-view {
   position: absolute;
@@ -38,18 +40,22 @@ html,body,#app,.page-view{
 }
 
 .swiper-main{
-  height:100%;
+  min-height:100%;
+  height:auto;
   .swiper-content {
     box-sizing: border-box;padding: 10px 0;
-    .swiper-slide {width:100% !important;height: 100%;opacity: 0.1;}
+    .swiper-slide {width:100% !important;height: auto;min-height:100%;opacity: 0.1;}
     .swiper-slide-active {opacity: 1;}
   }
 }
 .swiper-container{
-  height:100%;
+   min-height:100%;
+  height:auto;
 }
 .swiper-box{
-  width:100%;height:100%;
+  width:100%;
+  height:auto;
+  min-height:100%;
 }
 
 
@@ -61,7 +67,7 @@ html,body,#app,.page-view{
   .pictoral-item{
     width:80%;height:100%;margin-left:10%;padding:10px 15px;background:#fff;color:#333;border-radius:3px;text-align:center;
     h6{font-size:30px;text-align:center;margin:20px;}
-    img{width:auto;height:80%;margin:0 auto;}
+    img{width:auto;margin:0 auto;}
     p{font-size:26px;color:#aaa;text-align:right;padding:20px;}
   }
 }
@@ -73,15 +79,85 @@ html,body,#app,.page-view{
         .swiper-slide-active {color:#fff;}
         .swiper-slide-active::after{content: " ";display: block;width: 60%;height: 1px;background: #fff;position: absolute;bottom: 0;left: 20%;z-index: 999;}
     }
-    .things-main{
-      position: absolute;left:0;right:0;top:80px;bottom:0;background:#ccc;overflow:auto;
+    .things-time{
+      color:#24b8e4;text-align:center;padding:10px 0;font-size:28px;
     }
+    .things-main{
+      position: absolute;left:0;right:0;top:80px;bottom:0;background:#111;overflow:auto;
+    }
+    .things-item{
+      height:800px;overflow:hidden;position:relative;
+      .things-img-wrapper{
+        height:660px;width:100%;position:relative;text-align:center;
+        .things-item_img{
+          height:100%;width:100%;
+        }
+        .things-item_tips{
+         top:-80px;position:relative;background:#222;padding:6px 20px;border-radius:30px;font-size:26px;
+        }
+      }
+      .things-item-foot{
+        height:140px;overflow:hidden;padding:20px;
+        .foot-desc{
+          float:left;height:100px;
+        }
+        .foot-desc_logo{
+          float:left;display:inline-block;width:100px;height:100px;border-radius:50%;overflow:hidden;margin-right:20px;
+          img{height:100%;}
+        }
+        .foot-desc_text{
+          overflow:hidden;
+          .origin{font-size:24px;color:#333;}
+        }
+        .foot-action{
+          float:right;height:100px;line-height:100px;
+          span{vertical-align: top;padding:10px;}
+          .action-up{margin-top: 30px;font-size: 50px;margin-right: 10px;}
+          .action-down{margin-top: 10px;font-size: 50px;margin-left: 10px;}
+        }
+      }
+    }
+
 }
+
+
+.things-details{
+  background:#111;height:100%;width:100%;overflow:auto;
+  .goBack{
+    position: absolute;display: inline-block;padding: 20px;z-index:999;
+  }
+  .details-main{
+    position: relative;
+    .img-box{
+      height:600px;overflow:hidden;
+      img{width:100%;height:100%;}
+    }
+    .things-title{padding:20px;}
+    .desc-item{
+      margin-bottom:30px;
+    }
+    .things-desc{
+      padding:20px;background:#fff;color:#666;
+    }
+    .desc-item_icon{
+      margin-right:30px;
+    }
+    .desc-item_text{
+      overflow:hidden;font-size:28px;
+    }
+  }
+}
+
 
 
 // 下拉刷新插件
 ._v-content{
-  height:100%;
+  min-height:100%;
+  height:auto;
+}
+._v-container{
+  overflow:auto !important;
+  overflow-scroll:touch;
 }
 // loading 效果
 .spinner{

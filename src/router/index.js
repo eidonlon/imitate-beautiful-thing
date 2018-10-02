@@ -55,7 +55,7 @@ export default new Router({
           ]
         },
         {
-          path:'/details',
+          path:'/details/:id',
           name:'details',
           meta:{index:2},
           component:Details
