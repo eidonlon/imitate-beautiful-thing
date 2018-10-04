@@ -3,7 +3,6 @@ import App from './App'
 import router from './router'
 import store from './store'
 import scroller from 'vue-scroller'
-
 import 'font-awesome/scss/font-awesome.scss'
 import './assets/style/reset.css'
 import './assets/style/style.scss'

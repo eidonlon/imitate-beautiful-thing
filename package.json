@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "alloyfinger": "^0.1.15",
     "axios": "^0.18.0",
     "cssnano": "^4.1.4",
     "font-awesome": "^4.7.0",

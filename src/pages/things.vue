@@ -108,7 +108,7 @@
 				console.log("loading.......");
 				setTimeout(function(){
 					cb &&　cb();
-					done(); // 刷新结束的回调函数
+					// done(); // 刷新结束的回调函数
 				},2000);
 			},
 			showDetails: function(index){
