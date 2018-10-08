@@ -1,8 +1,23 @@
 *{box-sizing:border-box;}
 html,body,#app,.page-view{
   background:#ddd;
-	height:100%;width:100%;overflow:hidden;position:relative;
+	height:100%;width:100%;overflow:hidden;
   color:#fff;
+}
+html{
+  margin: 0 auto;
+  max-width: 768px;
+  background: #ddd;
+  position:fixed;
+}
+body{
+  background-color:#F9F9F9;
+  margin:0;
+  // font-size:.24rem;
+  position:fixed;
+  color: #333;
+  min-height: 100%;
+  font-family: "arial","微软雅黑";
 }
 .fl{float:left;}
 .fr{float:right;}
@@ -25,7 +40,8 @@ html,body,#app,.page-view{
 
 /* the footer tab bar */
 .tab-bar{
-	height:120px;width:100%;background:#fff;position:fixed;bottom:0;left:0;right:0;width:100%; 
+	height:120px;width:100%;background:#fff;position:fixed;bottom:0;left:0;right:0;width:100%; z-index: 99999;
+    box-shadow: -1px -1px 0 #dadada;
   ul{display:flex;justify-content:space-around;align-items:center;height:100%;}
   .tab-bar-item{padding:0 40px;text-align:center;color:#636363;}
   .tab-bar-item.active{color:#24b8e4;}
@@ -60,15 +76,17 @@ html,body,#app,.page-view{
 
 
 .pictoral{
-  position: absolute;top:8%;left:0;right:0;bottom:0;overflow:hidden;
+  position: absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;
   .swiper-container {
     height:100%;
   }
-  .pictoral-main{
+  .pictoral-main,.container{
     position:relative; height:100%;width:100%;
   } 
   .pictoral-item{
-    position:absolute;left:30%;right:30%;top:5%;height:80%;box-shadow: -1px -1px 0 #dadada;
+    position:absolute;top:5%;height:80%;box-shadow: -1px -1px 0 #dadada;
+    // left:30%;right:30%;
+    width:40%;z-index:1;
     padding:10px 15px;background:#fff;color:#333;border-radius:3px;text-align:center;
     h6{font-size:30px;text-align:center;margin:30px;font-weight: bold;}
     img{width:100%;margin:0 auto;height:70%;}
@@ -78,24 +96,32 @@ html,body,#app,.page-view{
       img{width:100%;height:100%;border-radius:50% 50%;}
     }
   }
-  .pictoral-item.showed{
-    top:100% !important;left:12% !important;right:12% !important;display:none;
+  .container{
+    display:flex;justify-content:center;
   }
-  // .pictoral-item.active{
-  //   top:36%;z-index:999;left:12%;right:12%;
-  // }
+  .pictoral-item.showed{
+    top:98% !important;
+  }
+
   .pictoral-item.first{
-    top:36%;z-index:999;left:12%;right:12%;
+    top:36%;
+    z-index:999;
+    width:76%;
   }
   .pictoral-item.second{
-    left:16%;right:16%;top:24%;z-index:99;
+    top:24%;
+    z-index:99;
+    width:68%;
   }
   .pictoral-item.third{
-    top:12%;z-index:9;
-    left:22%;right:22%;
+    top:12%;
+    z-index:9;
+    width:56%;
   }
    .pictoral-item.forth{
-    left:30%;right:30%;top:5%;
+    width:40%;
+    top:5%;
+    z-index:8;
   }
 }
 
@@ -103,8 +129,8 @@ html,body,#app,.page-view{
     position: relative;width:100%;height:100%;
     .things-nav{
       height:80px;line-height:80px;text-align:center;
-        .swiper-slide-active {color:#fff;}
-        .swiper-slide-active::after{content: " ";display: block;width: 60%;height: 1px;background: #fff;position: absolute;bottom: 0;left: 20%;z-index: 999;}
+        .active {color:#fff;}
+        .active::after{content: " ";display: block;width: 60%;height: 1px;background: #fff;position: absolute;bottom: 0;left: 20%;z-index: 999;}
     }
     .things-time{
       color:#24b8e4;text-align:center;padding:10px 0;font-size:28px;
@@ -113,9 +139,9 @@ html,body,#app,.page-view{
       position: absolute;left:0;right:0;top:80px;bottom:0;background:#111;overflow:auto;
     }
     .things-item{
-      height:800px;overflow:hidden;position:relative;
+      height:940px;overflow:hidden;position:relative;
       .things-img-wrapper{
-        height:660px;width:100%;position:relative;text-align:center;
+        height:800px;width:100%;position:relative;text-align:center;
         .things-item_img{
           height:100%;width:100%;
         }
@@ -149,9 +175,10 @@ html,body,#app,.page-view{
 
 
 .things-details{
-  background:#111;height:100%;width:100%;overflow:auto;
+  background:#111;height:100%;width:100%;overflow:auto;overflow-scroll:touch;
   .goBack{
-    position: absolute;display: inline-block;padding: 20px;z-index:999;
+    position: fixed;display: inline-block;padding: 20px;z-index:999;
+    i{color:#333;}
   }
   .details-main{
     position: relative;
@@ -160,6 +187,12 @@ html,body,#app,.page-view{
       img{width:100%;height:100%;}
     }
     .things-title{padding:20px;}
+    .desc-img-item{
+      text-align:center;
+      .img-item_text{
+        padding:25px 0;
+      }
+    }
     .desc-item{
       margin-bottom:30px;
     }
@@ -179,8 +212,8 @@ html,body,#app,.page-view{
    position: relative;width:100%;height:100%;
     .designer-nav{
       height:80px;line-height:80px;text-align:center;
-        .swiper-slide-active {color:#fff;}
-        .swiper-slide-active::after{content: " ";display: block;width: 60%;height: 1px;background: #fff;position: absolute;bottom: 0;left: 20%;z-index: 999;}
+        .active {color:#fff;}
+        .active::after{content: " ";display: block;width: 60%;height: 1px;background: #fff;position: absolute;bottom: 0;left: 20%;z-index: 999;}
     }
     .designer-time{
       color:#24b8e4;text-align:center;padding:10px 0;font-size:28px;
@@ -190,9 +223,9 @@ html,body,#app,.page-view{
     }
 
     .designer-item{
-      height:800px;overflow:hidden;position:relative;
+      height:1050px;overflow:hidden;position:relative;
       .designer-img-wrapper{
-        height:550px;width:100%;position:relative;text-align:center;
+        height:800px;width:100%;position:relative;text-align:center;
         .designer-item_img{
           height:100%;width:100%;
         }
@@ -211,7 +244,7 @@ html,body,#app,.page-view{
         }
         .foot-desc_text{
           overflow:hidden;
-          .origin{font-size:24px;color:#333;}
+          .origin{font-size:24px;color:#ababab;}
         }
         .foot-action{
           padding:20px;
@@ -224,7 +257,7 @@ html,body,#app,.page-view{
 }
 
 .personal{
-  background:#eee;position:absolute;top:0;bottom:0;left:0;right:0;
+  background:#eee;position:absolute;top:0;bottom:0;left:0;right:0;overflow:auto;
   .personal-logo{
     height:500px;background:#111;
     .logo{
@@ -261,10 +294,10 @@ html,body,#app,.page-view{
   min-height:100%;
   height:auto;
 }
-._v-container{
-  overflow:auto !important;
-  overflow-scroll:touch;
-}
+// ._v-container{
+//   overflow:auto !important;
+//   overflow-scroll:touch;
+// }
 
 
 
@@ -280,8 +313,9 @@ html,body,#app,.page-view{
 
 @keyframes down{
   0%{}
-  100%{top:100%;}
+  100%{top:100%;width:40%;}
 }
 .slider-down{
-  animation: down 1s ease;
+  // animation: down .5s ease;
+  // animation-fill-mode:forwards;
 }

@@ -1,7 +1,7 @@
 <template>
 	<div class="designer">
 		<div class="designer-nav">
-			<swiper :dataList="navList" ref="navSwiper" :swiperOption="swiperOptionNav" ></swiper>
+			<swiper :dataList="navList" :activeIndex="activeIndex" ref="navSwiper" :swiperOption="swiperOptionNav" ></swiper>
 		</div>
 		<div class="designer-main">
 			<scroller :on-refresh="refresh" :refreshText="refreshText" ref="scroller">
@@ -12,7 +12,7 @@
 						<div v-for="(item, index) in slotProps.data.dataList" :key="index" class="designer-item" >
 							<div class="designer-img-wrapper" @click="showDetails(item.id)">
 								<img class="designer-item_img" :src="item.img" alt="">
-								<span class="foot-desc_logo"><img :src="item.logo" alt=""></span>
+								<span class="foot-desc_logo"><img :src="item.icon" alt=""></span>
 							</div>
 							<div class="designer-item-foot">
 								<div class="foot-desc">
@@ -33,30 +33,13 @@
 	</div>
 </template>
 <script>
-	var demoData = [
-    	{id:1,title: 'Menu',author:"Menu",name:"'波特尔'研磨瓶",origin:"丹麦极简主义家居",img:"/static/images/pictoral_02.jpeg",logo:"/static/images/logo.jpg"},
-    	{id:2,title: 'Menu',author:"Menu",name:"'波特尔'研磨瓶",origin:"丹麦极简主义家居",img:"/static/images/pictoral_02.jpeg",logo:"/static/images/logo.jpg"},
-    	{id:3,title: 'Menu',author:"Menu",name:"'波特尔'研磨瓶",origin:"丹麦极简主义家居",img:"/static/images/pictoral_02.jpeg",logo:"/static/images/logo.jpg"},
-    	{id:4,title: 'Menu',author:"Menu",name:"'波特尔'研磨瓶",origin:"丹麦极简主义家居",img:"/static/images/pictoral_02.jpeg",logo:"/static/images/logo.jpg"},
-    	{id:5,title: 'Menu',author:"Menu",name:"'波特尔'研磨瓶",origin:"丹麦极简主义家居",img:"/static/images/pictoral_02.jpeg",logo:"/static/images/logo.jpg"}
-    ];
 	export default{
-		name: 'things',
+		name: 'designer',
 		data (){
 			return{
-				navList:[
-					{text:"Daily",dataList:demoData},
-					{text:"有物精选",dataList:[]},
-					{text:"首饰",dataList:[]},
-					{text:"包袋",dataList:[]},
-					{text:"鞋履",dataList:[]},
-					{text:"家居饰品",dataList:[]},
-					{text:"Men",dataList:[]},
-					{text:"配饰",dataList:[]},
-					{text:"烛台",dataList:[]},
-					{text:"服饰",dataList:[]},
-					{text:"其他",dataList:[]}
-				],
+				activeIndex:0,
+				navList:[],
+				author:'',
 				swiperOptionNav: {
 				  free:true,
 		          slidesPerView: 4,
@@ -66,50 +49,63 @@
 		          }
 		        },
 		        swiperOptionMain:{
+		        	autoHeight:true,
 		        	on:{
 			          	transitionEnd:this.changeNav,
-			          	transitionStart:function(){
-			          		console.log("start....");
-			          	}
 			        }
 		        },
-		        refreshText:'',
-		        dataList:11,
-		        thingsList:demoData
+		        refreshText:''
 			}
 		},
-		mounted(){
-			this.thingsList = demoData;
+		created(){
+			this.getData();
 		},
+		mounted(){
+		},	
 		methods:{
-			changeView: function(index){
-				console.log("it is change.");
-				console.log(this.$refs.navSwiper.$refs.swiper.swiper.activeIndex)
-				console.log(this.$refs.navSwiper.$refs.swiper.swiper.clickedIndex)
+			changeView: function(){
+				this.activeIndex = this.$refs.navSwiper.$refs.swiper.swiper.clickedIndex;
+				this.$refs.mainSwiper.$refs.swiper.swiper.slideTo(this.activeIndex,1000,false);
 			},
 			changeNav: function(){
-				console.log(this.$refs.mainSwiper.$refs.swiper.swiper.activeIndex);
 				let index = this.$refs.mainSwiper.$refs.swiper.swiper.activeIndex;
-				// this.thingsList = [];
 				this.$refs.navSwiper.$refs.swiper.swiper.slideTo(index,1000,false);
-
-
-				var self = this;
-				this.$refs.scroller.triggerPullToRefresh()
-
-				setTimeout(function(){
-					self.navList[index].dataList = demoData;
-				},2000)
+				this.activeIndex = this.$refs.mainSwiper.$refs.swiper.swiper.activeIndex;
 			},
-			refresh: function(done,cb){
-				console.log("loading.......");
-				setTimeout(function(){
-					cb &&　cb();
-					done(); // 刷新结束的回调函数
-				},2000);
+			refresh: function(done){
+				var self = this;
+				this.loadMore(function(result){
+					setTimeout(function(){
+						if(result.code == 200){
+							self.navList[self.activeIndex].dataList = result.list.concat(self.navList[self.activeIndex].dataList);
+						}
+						done();
+					},500);
+				});
 			},
 			showDetails: function(index){
 				this.$router.push("/details/"+index);
+			},
+			getData: function(cb){
+				var self = this;
+				this.$axios.post("/designer",{}).then(function(response){
+					var result = response.data;
+					if(result.code == 200){
+						self.navList  = result.list;
+					}
+					
+				}).catch(function(error){
+					console.log(error);
+				});
+			},
+			loadMore: function(cb){
+				var self = this;
+				this.$axios.post("/designer",{author:self.activeIndex}).then(function(response){
+					var result = response.data;
+					cb && cb(result);
+				}).catch(function(error){
+					console.log(error);
+				});
 			}
 		}
 	};

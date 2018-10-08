@@ -1,191 +1,154 @@
 <template>
 	<div class="pictoral">
 		<div class="pictoral-main">
-			<div v-for="(data, index) in dataList" :key="index" class="pictoral-item" 
-				:class="{first: index == first,second: index == second,third: index == third,fouth: index == fouth,'slider-down':isDown === index,'showed':index < first}" :style="{transform:'translateY('+translatey+'px)'}">
-				<span class="pictoral-item_logo"><!-- <img :src="data.icon" alt=""> --></span>
-				<h6>{{data.title}}</h6>
-				<p>——{{data.originate}}</p>
-				<img :src="data.img" alt="">
-				<p>{{data.desc}}</p>
-			</div>
+			 <transition-group name="cell" tag="div" class="container">
+				<div v-for="(data, index) in dataList" :key="index" class="pictoral-item" 
+					:class="{'first': index == first,'second ': index == second,'third ': index == third,'forth ': index == forth,'showed':index < first && showed}"
+				>
+					<span class="pictoral-item_logo"><img :src="data.icon" alt=""></span>
+					<h6>{{data.title}}</h6>
+					<p>——{{data.originate}}</p>
+					<img :src="data.img" alt="">
+					<p>{{data.desc}}</p>
+				</div>
+			</transition-group>
 		</div>
 	</div>
 </template>
 <script>
 	import AlloyFinger from 'alloyfinger'
+	// import Velocity from 'velocity-animate/velocity.js'
+	// import 'velocity-animate/velocity.ui.js'
 	export default{
 		name: 'pictoral',
 		data (){
 			return{
-				dataList:[
-					{title:"梵高/ 自画像",icon:'/static/images/logo.jpg',desc:'站在痛苦之外规劝受苦的人，是件很容易的事。',img:'/static/images/pictoral_01.jpeg',originate:'《被束缚的普罗米修斯》'},
-					{title:"梵高/ 自画像",icon:'/static/images/logo.jpg',desc:'站在痛苦之外规劝受苦的人，是件很容易的事。',img:'/static/images/pictoral_02.jpeg',originate:'《被束缚的普罗米修斯1》'},
-					{title:"梵高/ 自画像",icon:'/static/images/logo.jpg',desc:'站在痛苦之外规劝受苦的人，是件很容易的事。',img:'/static/images/pictoral_02.jpeg',originate:'《被束缚的普罗米修斯2》'},
-					{title:"梵高/ 自画像",icon:'/static/images/logo.jpg',desc:'站在痛苦之外规劝受苦的人，是件很容易的事。',img:'/static/images/pictoral_02.jpeg',originate:'《被束缚的普罗米修斯3》'},
-					{title:"梵高/ 自画像",icon:'/static/images/logo.jpg',desc:'站在痛苦之外规劝受苦的人，是件很容易的事。',img:'/static/images/pictoral_01.jpeg',originate:'《被束缚的普罗米修斯》'},
-					{title:"梵高/ 自画像",icon:'/static/images/logo.jpg',desc:'站在痛苦之外规劝受苦的人，是件很容易的事。',img:'/static/images/pictoral_01.jpeg',originate:'《被束缚的普罗米修斯》'},
-					{title:"梵高/ 自画像",icon:'/static/images/logo.jpg',desc:'站在痛苦之外规劝受苦的人，是件很容易的事。',img:'/static/images/pictoral_01.jpeg',originate:'《被束缚的普罗米修斯》'},
-					{title:"梵高/ 自画像",icon:'/static/images/logo.jpg',desc:'站在痛苦之外规劝受苦的人，是件很容易的事。',img:'/static/images/pictoral_01.jpeg',originate:'《被束缚的普罗米修斯》'},
-				],
+				dataList:[],
 				translatey:0,
-				activeIndex:0,
 				isTouchMove:false,
 				isDown:false,
 				first:0,
 				second:1,
 				third:2,
-				fouth:3,
+				forth:3,
 				slideStart:0,
-				slideEnd:0
+				slideEnd:0,
+				showed:false
 			}
 		},
-		mounted(){
-			var self = this;
-			var el = document.querySelector(".pictoral-main");
-			var items = document.querySelector(".pictoral-item");
-			var fl = new AlloyFinger(el,{
-				touchStart: function(evt){
-					self.slideStart = evt.changedTouches[0].clientY;
-					console.log("toush start...")
-				},
-				touchMove: function (evt) {
-					console.log("toush Move...");
-					self.slideDown(evt);
-				},
-   				touchEnd:  function (evt) { 
-   					self.slideEnd = evt.changedTouches[0].clientY;
-   					if(self.slideEnd - self.slideStart > 120){
-   						 self.isDown = self.first;
-   						 setTimeout(function(){
-	   						self.first += 1;
-	   						self.second += 1;
-	   						self.third += 1;
-	   						self.fouth += 1;
-	   						self.translatey = 0;
-	   					},700);
-   					}else{
-   						self.translatey = 0;
-   					}
-
-   					
-   					console.log(self.slideEnd - self.slideStart);
-   					console.log("toush end...");
-   				},
-			 //    touchCancel: function () { 
-			 //    	console.log("toush Cancel...")
-			 //    },
-			    // multipointStart: function () {
-			    // 	console.log("toush Start...")
-			    // },
-			    // multipointEnd: function () {
-			    // 	console.log("toush multipointEnd...");
-			    // },
-			    // tap: function () {
-			    // 	console.log("toush tap...");
-			    // },
-			    // doubleTap: function () {
-			    // 	console.log("toush doubleTap...");
-			    // },
-			    // longTap: function () {
-			    // 	console.log("toush longTap...");
-			    // },
-			    // singleTap: function () {
-			    // 	console.log("toush singleTap...");
-			    // },
-			    // rotate: function (evt) {
-			    //     console.log(evt.angle);
-			    // },
-			    // pinch: function (evt) {
-			    //     console.log(evt.zoom);
-			    // },
-			    // pressMove: function (evt) {
-			    //     console.log(evt.deltaX);
-			    //     console.log(evt.deltaY);
-			    // },
-			    // swipe: function (evt) {
-			    //     console.log("swipe" + evt.direction);
-			    //     console.log(evt)
-			    // }
-			})
+		created: function(){
+			this.getData();
+		},
+		mounted: function(){
+			setTimeout(this.bindSlide,500)
 		},
 		methods:{
+			bindSlide: function(){
+				var self = this;
+				var el = document.querySelector(".pictoral-main");
+
+				self.setWidth();
+				var fl = new AlloyFinger(el,{
+					touchStart: function(evt){
+						self.slideStart = evt.changedTouches[0].clientY;
+					},
+					touchMove: function (evt) {
+						self.slideDown(evt);
+					},
+	   				swipe:  function (evt) { 
+	   					self.slideEnd = evt.changedTouches[0].clientY;
+	   					var timer = null;
+	   					if(self.slideEnd - self.slideStart > 30){
+	   							self.showed = true;
+		   						self.first += 1;
+		   						self.second += 1;
+		   						self.third += 1;
+		   						self.forth += 1;
+	   						 	
+	   						 setTimeout(function(){
+								self.setWidth();
+							 },0);
+							 setTimeout(function(){
+							 	var itemList = document.querySelectorAll(".showed");
+					 			itemList[itemList.length - 1].style.zIndex =2000 - (1000 - self.first);
+					 		},10);
+	   						  setTimeout(function(){
+							 	self.loadMore();
+							 },1000);
+	   					}else if(self.slideEnd - self.slideStart < -30){
+	   						if(self.first > 0){
+	   							var itemList = document.querySelectorAll(".showed");
+	   							itemList[itemList.length - 1].style.top = '40%';
+
+					       		self.first -= 1;
+								self.second -= 1;
+								self.third -= 1;
+								self.forth -= 1;
+
+								setTimeout(function(){
+									var itemList = document.querySelectorAll(".showing");
+									itemList.forEach(function(val,index){
+										val.style.top = '';
+									});
+									self.setWidth();
+								},0);
+	   						}
+	   						
+	   					}
+	   				}
+				})
+			},
+			setWidth: function(){
+				document.querySelector(".first").style.width = '76%';
+	 			document.querySelector(".second").style.width = '68%';
+	 			document.querySelector(".third").style.width = '56%';
+	 			document.querySelector(".forth").style.width = '40%';
+			},
 			slideDown: function(evt){
 				var self = this;
 				var el = document.querySelector(".pictoral-main");
-				var items = document.querySelector(".pictoral-item");
-       			var maxWidth = document.querySelector(".pictoral-main").offsetWidth;
+       			var maxWidth = document.querySelector(".pictoral-main").offsetWidth *.76;
 			    var itemList = document.querySelectorAll(".pictoral-item");
-
-				self.translatey += Number(evt.deltaY);
-			    self.isTouchMove = true;
-			
-		       if(evt.deltaY > 0){
-		       		itemList.forEach(function(val,index){
-		       			val.style.zIndex = (10000 - index);
-			        })
-		       }else{
-		       		document.querySelectorAll(".pictoral-item").forEach(function(val,index){
-		       			
-			        })
+			    var len = 0;
+		       if(evt.deltaY >= 0){
+		       		if(evt.deltaY != 0){
+	       				itemList[self.first].style.top = (itemList[self.first].offsetTop + 10) + "px";
+		       		}
+	       			itemList[self.first].style.zIndex = (1000 - self.first);
 		       }
 			},
-			// slideDown: function(evt){
-			// 	var self = this;
-			// 	var el = document.querySelector(".pictoral-main");
-			// 	var items = document.querySelector(".pictoral-item");
-
-			// 	self.translatey += Number(evt.deltaY);
-			//         self.isTouchMove = true;
-			//         var maxWidth = document.querySelector(".pictoral-main").offsetWidth;
-			//         var itemList = document.querySelectorAll(".pictoral-item");
-
-			//        if(evt.deltaY > 0){
-			//        		itemList.forEach(function(val,index){
-			//        			if(index == self.activeIndex){
-			//        				val.style.width = (val.offsetWidth+2) +"px";
-			// 			       	val.style.left = (val.offsetLeft-1) +"px";
-			// 			       	val.style.top = (val.offsetTop + 8) + "px";
-
-			// 			       	if(val.offsetTop > 260) {
-			// 			       		console.log("down........")
-			// 			       		self.isDown = true;
-
-			// 			       		setTimeout(function(){
-						       			
-			// 			       			console.log(self.activeIndex )
-			// 			       			val.className += val.className.indexOf('showed') > -1 ? '' : ' showed';
-			// 			       		},1000);
-			// 			       	}
-			//        			}else{
-
-			// 	       			if(val.offsetWidth < maxWidth){
-			// 	       				val.style.width = (val.offsetWidth+2) +"px";
-			// 			       		val.style.left = (val.offsetLeft-1) +"px";
-			// 	       			}
-
-			// 	       			if(index >　3){
-			// 	       				val.style.width = (itemList[3].offsetWidth - 50) + "px";
-			// 	       				val.style.left = (itemList[3].offsetLeft + 25) + "px";
-			// 	       				val.style.top = (itemList[3].offsetTop - 30) + "px";
-			// 	       			}
-			//        			}
-
-			//        			val.style.zIndex = (10000 - index);
-			// 	        })
-			//        }else{
-			//        		document.querySelectorAll(".pictoral-item").forEach(function(val,index){
-			//        			if(index == self.activeIndex){
-			//        				val.style.width = (val.offsetWidth-2) +"px";
-			// 			       	val.style.left = (val.offsetLeft+1) +"px";
-			// 			       	val.style.top = (val.offsetTop - 8) + "px";
-			//        			}else{
-			//        				val.style.width = (val.offsetWidth-2) +"px";
-			// 		      	 	val.style.left = (val.offsetLeft+1) +"px";
-			//        			}
-			// 	        })
-			//        }
-			// }
+			getData: function(){
+				var self = this;
+				this.$axios.post("/pictoral",{}).then(function(response){
+					var result = response.data;
+					if(result.code == 200){
+						self.dataList =self.dataList = result.list;
+					}
+				}).catch(function(error){
+					console.log(error);
+				});
+			},
+			loadMore: function(){
+				var self = this;
+				this.$axios.post("/pictoral",{pageSize:2}).then(function(response){
+					var result = response.data;
+					if(result.code == 200){
+						self.dataList = self.dataList.concat(result.list);
+					}
+				}).catch(function(error){
+					console.log(error);
+				});
+			}
 		}
 	};
+
+
+
+	
 </script>
+<style>
+.cell-move {
+  transition: transform .5s linear;
+  transform: translate3d(0,0,0);
+}
+</style>

@@ -1,0 +1,72 @@
+{
+	"拉斐尔":{
+		"title": "拉斐尔/ 意大利",
+		"icon":"./static/images/logo.jpg",
+		"portrait":"./static/images/lfe.png",
+		"desc":"拉斐尔，是意大利杰出的画家，和达芬奇、米开朗基罗并称文艺复兴三杰，也是三杰中最年轻的一位。拉斐尔谢世时年仅37岁，但由于他勤勉的创作，给世人留下了300多幅珍贵的艺术作品。拉斐尔的作品博采众家之长，形成了自己独特的风格，是手法主义的代表人物，也代表了当时人们最崇尚的审美趣味，成为后世古典主义者不可企及的典范。",
+		"magnumOpus":"《安西帝圣母》、《草地上的圣母》、《佛利诺的圣母》",
+		"genre":"文艺复兴、古典主义",
+		"arts":[
+			{"img":"./static/images/lfe01.jpg","originate":"《雅典学院》 局部"},
+			{"img":"./static/images/lfe02.jpg","originate":"《圣母的婚礼》"},
+			{"img":"./static/images/lfe03.jpg","originate":"《圣乔治与龙》"},
+			{"img":"./static/images/lfe04.jpg","originate":"《西斯廷圣母》"}
+		]
+	},
+	"达芬奇":{
+		"title": "达芬奇/ 意大利",
+		"icon":"./static/images/logo.jpg",
+		"portrait":"./static/images/dfq.jpg",
+		"desc":"达芬奇全名为莱昂纳多·达·芬奇（1452—1519），是与拉斐尔，米开朗基罗齐名的意大利文艺复兴三杰之一，也是整个欧洲文艺复兴时期最完美的代表。达芬奇是一位思想深邃，学识渊博、多才多艺的画家、寓言家、雕塑家、发明家、哲学家、音乐家、医学家、生物学家、地理学家、建筑工程师和军事工程师。",
+		"magnumOpus":"《蒙娜丽莎》《抱银鼠的女子》《卢克雷齐亚·克里韦利》 、《最后的晚餐》",
+		"genre":"文艺复兴",
+		"arts":[
+			{"img":"./static/images/dfq01.jpg","originate":"《蒙娜丽莎》"},
+			{"img":"./static/images/dfq02.jpg","originate":"《抱貂的女子》"},
+			{"img":"./static/images/dfq03.jpg","originate":"《岩间圣母》"},
+			{"img":"./static/images/dfq04.jpg","originate":"《持康乃馨的圣母》"}
+		]
+	},
+	"丢勒":{
+		"title": "丢勒/ 德国",
+		"icon":"./static/images/logo.jpg",
+		"portrait":"./static/images/dl.jpg",
+		"desc":"阿尔弗雷德·丢勒（Albrecht Dürer ，1471－1528）生于纽伦堡，是德国画家、版画家及木版画设计家。丢勒的作品包括木刻版画及其他版画、油画、素描草图以及素描作品。丢勒的作品中，以版画最具影响力",
+		"magnumOpus":"《启示录》、《基督大难》、《小受难》、《男人浴室》、《海怪》、《浪荡子》、《伟大的命运》、《亚当与夏娃》、《骑士、死亡与恶魔》",
+		"genre":"文艺复兴",
+		"arts":[
+			{"img":"./static/images/dl01.jpg","originate":"《丢勒26岁自画像》"},
+			{"img":"./static/images/dl02.jpg","originate":"《圣母七苦》"},
+			{"img":"./static/images/dl03.jpg","originate":"《圣徒对三位一体的崇拜》"},
+			{"img":"./static/images/dl04.jpg","originate":"《圣母七苦之逃往埃及》"}
+		]
+	},
+	"韦登":{
+		"title": "韦登/ 比利时",
+		"icon":"./static/images/logo.jpg",
+		"portrait":"./static/images/wd.jpg",
+		"desc":"吉尔·凡·德·韦登（R．V．Weyden, 1399-1464）是一位比扬·凡·艾克稍晚的有影响的尼德兰画家。韦登是罗伯特·康平的学生，曾去过意大利，主要在布鲁塞尔从事创作。",
+		"magnumOpus":"《下十字架》（1435年）、《圣卢克绘制圣母像》、《妇女肖像》、 《最后的审判》",
+		"genre":"文艺复兴",
+		"arts":[
+			{"img":"./static/images/wd01.jpg","originate":"《让·戈洛的肖像》"},
+			{"img":"./static/images/wd02.jpg","originate":"《天使报喜》"},
+			{"img":"./static/images/wd03.jpg","originate":"《女子肖像》"},
+			{"img":"./static/images/wd04.jpg","originate":"《visitation》"}
+		]
+	},
+	"梵高":{
+		"title": "梵高/ 荷兰",
+		"icon":"./static/images/logo.jpg",
+		"portrait":"./static/images/fg.jpg",
+		"desc":"文森特·威廉·梵高（Vincent Willem van Gogh, 1853年－1890年），荷兰后印象派代表性画家。梵高1853年3月30日生于津德尔特，早期因为表达内心的悲痛，曾割断了自己的耳朵。梵高1890年7月29日在法国瓦兹河畔因困扰其多年的精神病发作自杀身亡",
+		"magnumOpus":"自画像系列、星月夜、向日葵系列、吃土豆的人",
+		"genre":"印象派、后印象主义",
+		"arts":[
+			{"img":"./static/images/fg01.jpg","originate":"《自画像》"},
+			{"img":"./static/images/fg02.jpg","originate":"《红罂粟与雏菊》"},
+			{"img":"./static/images/fg03.jpg","originate":"《粉红色的桃花树》"},
+			{"img":"./static/images/fg04.jpg","originate":"《在奥维尔的房子》"}
+		]
+	}
+}

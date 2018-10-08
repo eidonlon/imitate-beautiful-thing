@@ -18,6 +18,13 @@ const postcssCssnext = require('postcss-cssnext');
 const postcssViewportUnits = require('postcss-viewport-units');
 const cssnano = require('cssnano');
 
+//个人后台配置
+const express = require('express');
+const apiRouter = express.Router();
+const app = express()
+var router = require("../server/index");
+app.use("/api",apiRouter);
+
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
@@ -50,6 +57,16 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
+    },
+    proxy:{
+      '/api':{
+        target:'http://127.0.0.1:8080',
+        changeOrigin:true,
+        pathRewrite:{'^/api': ''}
+      }
+    },
+    before(app){
+      router(app);
     }
   },
   plugins: [
