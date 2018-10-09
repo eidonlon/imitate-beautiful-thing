@@ -1,5 +1,4 @@
 
-
 var router = function(app){
 	var fs = require("fs");
 	var path = require("path");
@@ -18,9 +17,7 @@ var router = function(app){
 		}
 	});
 
-
 	app.post("/pictoral",function(req,res){
-		var pageSize = req.body.pageSize || 5;
 		var list = [];
 		if(fileData){
 			for(var i in fileData){
@@ -35,27 +32,7 @@ var router = function(app){
 				temp.originate = _arts.originate;
 				list.push(temp);
 			}
-			for(var i in fileData){
-				var _num = Math.floor(Math.random()*4);
-				var temp = {};
-				var _arts =fileData[i].arts[_num];
-
-				temp.title = fileData[i].title;
-				temp.icon = fileData[i].icon;
-				temp.genre = fileData[i].genre;
-				temp.img = _arts.img;
-				temp.originate = _arts.originate;
-				list.push(temp);
-			}
-			if(pageSize == 2){
-				var _temp = {};
-				var _temp02 = {};
-				var _num = Math.floor(Math.random()*4);
-				_temp = list[_num];
-				_temp02 = list[_num + 1];
-				list = [_temp,_temp02];
-			}
-
+			list = list.concat(list); // 数据太少不够演示，这里重复使用之前的数据
 			res.send({"list":list,"code":200,"msg":""});
 		}else{
 			res.send({"list":[],"code":10001,"msg":"获取数据失败,请重试."});
@@ -196,7 +173,4 @@ var router = function(app){
 		}
 	});
 }
-
-
-
 module.exports = router;

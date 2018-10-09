@@ -7,16 +7,13 @@ import scroller from 'vue-scroller'
 import 'font-awesome/scss/font-awesome.scss'
 import './assets/style/reset.css'
 import './assets/style/style.scss'
-
-import tabbar from './packages/tabBar'
-import swiper from './packages/swiper'
-
+import tabbar from './components/tabBar'
+import swiper from './components/swiper'
 
 Vue.config.productionTip = false
 Vue.config.devtools = true
 
 Vue.prototype.$axios = axios
-
 Vue.use(scroller)
 Vue.use(tabbar)
 Vue.use(swiper)

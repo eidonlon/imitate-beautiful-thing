@@ -15,15 +15,12 @@
 			return {
 				isActive:this.$store.state.tabIndex,
 				itemList:[
-					{id:1,text:"画报",icon:"fa fa-clipboard",link:'/'},
-					{id:2,text:"有物",icon:"fa fa-smile-o",link:'/things'},
+					{id:1,text:"推荐",icon:"fa fa-clipboard",link:'/'},
+					// {id:2,text:"有物",icon:"fa fa-smile-o",link:'/things'},
 					{id:3,text:"设计师",icon:"fa fa-pencil",link:'/designer'},
 					{id:4,text:"我",icon:"fa fa-user-o",link:'/personal'}
 				]
 			}
-		},
-		mounted(){
-			
 		},
 		methods:{
 			addActive: function(index,item){

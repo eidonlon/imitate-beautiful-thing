@@ -1,109 +1,139 @@
 <template>
-	<div class="designer">
-		<div class="designer-nav">
-			<swiper :dataList="navList" :activeIndex="activeIndex" ref="navSwiper" :swiperOption="swiperOptionNav" ></swiper>
-		</div>
-		<div class="designer-main">
-			<scroller :on-refresh="refresh" :refreshText="refreshText" ref="scroller">
-				<span style="width:20px;height:20px;" class="spinner" slot="refresh-spinner"></span>
-				<div class="designer-time">TODAY</div>
-				<swiper :dataList="navList"  ref="mainSwiper" :swiperOption="swiperOptionMain" >
-					<div slot="swiperMain" slot-scope="slotProps">
-						<div v-for="(item, index) in slotProps.data.dataList" :key="index" class="designer-item" >
-							<div class="designer-img-wrapper" @click="showDetails(item.id)">
-								<img class="designer-item_img" :src="item.img" alt="">
-								<span class="foot-desc_logo"><img :src="item.logo" alt=""></span>
-							</div>
-							<div class="designer-item-foot">
-								<div class="foot-desc">
-									<div class="foot-desc_text">
-										<p>{{item.author}}</p>
-										<p class="origin">{{item.origin}}</p>
-									</div>
-								</div>
-								<div class="foot-action">
-									<span class="foot-actionr_follow">+ 关注</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</swiper>
-			</scroller>
+	<div class="pictoral">
+		<div class="pictoral-main">
+			 <transition-group name="cell" tag="div" class="container">
+				<div v-for="(data, index) in dataList" :key="index" class="pictoral-item" 
+					:class="{'first': index == first,'second ': index == second,'third ': index == third,'forth ': index == forth,'showed':index < first && showed}">
+					<span class="pictoral-item_logo"><img :src="data.icon" alt=""></span>
+					<h6>{{data.title}}</h6>
+					<p>——{{data.originate}}</p>
+					<!-- <img :src="data.img" alt=""> -->
+					<p>{{data.desc}}</p>
+				</div>
+			</transition-group>
 		</div>
 	</div>
 </template>
 <script>
+	import AlloyFinger from 'alloyfinger'
+	// import Velocity from 'velocity-animate/velocity.js'
+	// import 'velocity-animate/velocity.ui.js'
 	export default{
-		name: 'designer',
+		name: 'pictoral',
 		data (){
 			return{
-				activeIndex:0,
-				navList:[],
-				author:'',
-				swiperOptionNav: {
-				  free:true,
-		          slidesPerView: 4,
-		          slideToClickedSlide: true,
-		          on:{
-		          	tap:this.changeView
-		          }
-		        },
-		        swiperOptionMain:{
-		        	on:{
-			          	transitionEnd:this.changeNav,
-			        }
-		        },
-		        refreshText:''
+				dataList:[],
+				translatey:0,
+				isTouchMove:false,
+				isDown:false,
+				first:0,
+				second:1,
+				third:2,
+				forth:3,
+				slideStart:0,
+				slideEnd:0,
+				showed:false
 			}
 		},
-		created(){
+		created: function(){
 			this.getData();
 		},
-		mounted(){
-		},	
+		mounted: function(){
+			setTimeout(this.bindSlide,500)
+		},
 		methods:{
-			changeView: function(){
-				this.activeIndex = this.$refs.navSwiper.$refs.swiper.swiper.clickedIndex;
-				this.$refs.mainSwiper.$refs.swiper.swiper.slideTo(this.activeIndex,1000,false);
-			},
-			changeNav: function(){
-				let index = this.$refs.mainSwiper.$refs.swiper.swiper.activeIndex;
-				this.$refs.navSwiper.$refs.swiper.swiper.slideTo(index,1000,false);
-				this.activeIndex = this.$refs.mainSwiper.$refs.swiper.swiper.activeIndex;
+			bindSlide: function(){
 				var self = this;
-				this.$refs.scroller.triggerPullToRefresh()
+				var el = document.querySelector(".pictoral-main");
+
+				self.setWidth();
+				var fl = new AlloyFinger(el,{
+					touchStart: function(evt){
+						self.slideStart = evt.changedTouches[0].clientY;
+					},
+					touchMove: function (evt) {
+						self.slideDown(evt);
+					},
+	   				swipe:  function (evt) { 
+	   					self.slideEnd = evt.changedTouches[0].clientY;
+	   					var timer = null;
+	   					if(self.slideEnd - self.slideStart > 30){
+	   							self.showed = true;
+		   						self.first += 1;
+		   						self.second += 1;
+		   						self.third += 1;
+		   						self.forth += 1;
+	   						 	
+	   						 setTimeout(function(){
+								self.setWidth();
+							 },0);
+							 setTimeout(function(){
+							 	var itemList = document.querySelectorAll(".showed");
+					 			itemList[itemList.length - 1].style.zIndex =2000 - (1000 - self.first);
+					 		},10);
+	   						  setTimeout(function(){
+							 	self.loadMore();
+							 },1000);
+	   					}else if(self.slideEnd - self.slideStart < -30){
+	   						if(self.first > 0){
+	   							var itemList = document.querySelectorAll(".showed");
+	   							itemList[itemList.length - 1].style.top = '40%';
+
+					       		self.first -= 1;
+								self.second -= 1;
+								self.third -= 1;
+								self.forth -= 1;
+
+								setTimeout(function(){
+									var itemList = document.querySelectorAll(".showing");
+									itemList.forEach(function(val,index){
+										val.style.top = '';
+									});
+									self.setWidth();
+								},0);
+	   						}
+	   						
+	   					}
+	   				}
+				})
 			},
-			refresh: function(done){
+			setWidth: function(){
+				// document.querySelector(".first").style.width = '76%';
+	 		// 	document.querySelector(".second").style.width = '68%';
+	 		// 	document.querySelector(".third").style.width = '56%';
+	 		// 	document.querySelector(".forth").style.width = '40%';
+			},
+			slideDown: function(evt){
 				var self = this;
-				this.loadMore(function(result){
-					setTimeout(function(){
-						if(result.code == 200){
-							self.navList[self.activeIndex].dataList = result.list.concat(self.navList[self.activeIndex].dataList);
-						}
-						done();
-					},500);
-				});
+				var el = document.querySelector(".pictoral-main");
+       			var maxWidth = document.querySelector(".pictoral-main").offsetWidth *.76;
+			    var itemList = document.querySelectorAll(".pictoral-item");
+			    var len = 0;
+		       if(evt.deltaY >= 0){
+		       		if(evt.deltaY != 0){
+	       				itemList[self.first].style.top = (itemList[self.first].offsetTop + 10) + "px";
+		       		}
+	       			itemList[self.first].style.zIndex = (1000 - self.first);
+		       }
 			},
-			showDetails: function(index){
-				this.$router.push("/details/"+index);
-			},
-			getData: function(cb){
+			getData: function(){
 				var self = this;
-				this.$axios.post("/designer",{}).then(function(response){
+				this.$axios.post("/pictoral",{}).then(function(response){
 					var result = response.data;
 					if(result.code == 200){
-						self.navList  = result.list;
+						self.dataList =self.dataList = result.list;
 					}
-					
 				}).catch(function(error){
 					console.log(error);
 				});
 			},
-			loadMore: function(cb){
+			loadMore: function(){
 				var self = this;
-				this.$axios.post("/designer",{author:self.activeIndex}).then(function(response){
+				this.$axios.post("/pictoral",{pageSize:2}).then(function(response){
 					var result = response.data;
-					cb && cb(result);
+					if(result.code == 200){
+						self.dataList = self.dataList.concat(result.list);
+					}
 				}).catch(function(error){
 					console.log(error);
 				});
@@ -111,116 +141,23 @@
 		}
 	};
 </script>
-<template>
-	<div class="designer">
-		<div class="designer-nav">
-			<swiper :dataList="navList" :activeIndex="activeIndex" ref="navSwiper" :swiperOption="swiperOptionNav" ></swiper>
-		</div>
-		<div class="designer-main">
-			<scroller :on-refresh="refresh" :refreshText="refreshText" ref="scroller">
-				<span style="width:20px;height:20px;" class="spinner" slot="refresh-spinner"></span>
-				<div class="designer-time">TODAY</div>
-				<swiper :dataList="navList"  ref="mainSwiper" :swiperOption="swiperOptionMain" >
-					<div slot="swiperMain" slot-scope="slotProps">
-						<div v-for="(item, index) in slotProps.data.dataList" :key="index" class="designer-item" >
-							<div class="designer-img-wrapper" @click="showDetails(item.id)">
-								<img class="designer-item_img" :src="item.img" alt="">
-								<span class="foot-desc_logo"><img :src="item.logo" alt=""></span>
-							</div>
-							<div class="designer-item-foot">
-								<div class="foot-desc">
-									<div class="foot-desc_text">
-										<p>{{item.author}}</p>
-										<p class="origin">{{item.origin}}</p>
-									</div>
-								</div>
-								<div class="foot-action">
-									<span class="foot-actionr_follow">+ 关注</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</swiper>
-			</scroller>
-		</div>
-	</div>
-</template>
-<script>
-	export default{
-		name: 'designer',
-		data (){
-			return{
-				activeIndex:0,
-				navList:[],
-				author:'',
-				swiperOptionNav: {
-				  free:true,
-		          slidesPerView: 4,
-		          slideToClickedSlide: true,
-		          on:{
-		          	tap:this.changeView
-		          }
-		        },
-		        swiperOptionMain:{
-		        	on:{
-			          	transitionEnd:this.changeNav,
-			        }
-		        },
-		        refreshText:''
-			}
-		},
-		created(){
-			this.getData();
-		},
-		mounted(){
-		},	
-		methods:{
-			changeView: function(){
-				this.activeIndex = this.$refs.navSwiper.$refs.swiper.swiper.clickedIndex;
-				this.$refs.mainSwiper.$refs.swiper.swiper.slideTo(this.activeIndex,1000,false);
-			},
-			changeNav: function(){
-				let index = this.$refs.mainSwiper.$refs.swiper.swiper.activeIndex;
-				this.$refs.navSwiper.$refs.swiper.swiper.slideTo(index,1000,false);
-				this.activeIndex = this.$refs.mainSwiper.$refs.swiper.swiper.activeIndex;
-				var self = this;
-				this.$refs.scroller.triggerPullToRefresh()
-			},
-			refresh: function(done){
-				var self = this;
-				this.loadMore(function(result){
-					setTimeout(function(){
-						if(result.code == 200){
-							self.navList[self.activeIndex].dataList = result.list.concat(self.navList[self.activeIndex].dataList);
-						}
-						done();
-					},500);
-				});
-			},
-			showDetails: function(index){
-				this.$router.push("/details/"+index);
-			},
-			getData: function(cb){
-				var self = this;
-				this.$axios.post("/things",{}).then(function(response){
-					var result = response.data;
-					if(result.code == 200){
-						self.navList  = result.list;
-					}
-					
-				}).catch(function(error){
-					console.log(error);
-				});
-			},
-			loadMore: function(cb){
-				var self = this;
-				this.$axios.post("/things",{author:self.activeIndex}).then(function(response){
-					var result = response.data;
-					cb && cb(result);
-				}).catch(function(error){
-					console.log(error);
-				});
-			}
-		}
-	};
-</script>
+<style>
+/*.cell-move.first{
+	width:76%;
+}
+.cell-move.second{
+	width:68%;
+}
+.cell-move.third{
+	width:56%;
+}
+.cell-move.forth{
+	width:40%;
+}*/
+.cell-move {
+  transition: transform .5s linear;
+  transform: translate3d(0,0,0);
+}
+
+
+</style>
