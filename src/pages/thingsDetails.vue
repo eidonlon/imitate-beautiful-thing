@@ -1,6 +1,9 @@
 <template>
-	<div class="things-details">
-		<span @click="goBack" class="goBack"><i class="fa fa-2x fa-arrow-circle-left"></i></span>
+	<div class="things-details" >
+		<div class="page-title">
+			<span @click="goBack" class="goBack"><i class="fa fa-2x fa-arrow-circle-left"></i></span>
+			<h3>{{id}}</h3>
+		</div>
 		<div class="details-main">
 			<div class="img-box">
 				<img :src="img" alt="">

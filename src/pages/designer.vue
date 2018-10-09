@@ -12,7 +12,7 @@
 						<div v-for="(item, index) in slotProps.data.dataList" :key="index" class="designer-item" >
 							<div class="designer-img-wrapper" @click="showDetails(item.id)">
 								<img class="designer-item_img" :src="item.img" alt="">
-								<span class="foot-desc_logo"><img :src="item.icon" alt=""></span>
+								<span class="foot-desc_logo" @click="test"><img :src="item.icon" alt=""></span>
 							</div>
 							<div class="designer-item-foot">
 								<div class="foot-desc">
@@ -22,7 +22,7 @@
 									</div>
 								</div>
 								<div class="foot-action">
-									<span class="foot-actionr_follow">+ 关注</span>
+									<span @click="showTotast" class="foot-actionr_follow">+ 关注</span>
 								</div>
 							</div>
 						</div>
@@ -106,6 +106,13 @@
 				}).catch(function(error){
 					console.log(error);
 				});
+			},
+			showTotast: function(){
+				// console.log(this.$toast)
+				this.$toast({message:"哈哈哈"});
+			},
+			test: function(){
+				this.$toast({message:"这是一个test."});
 			}
 		}
 	};

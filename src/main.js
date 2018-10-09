@@ -9,6 +9,7 @@ import './assets/style/reset.css'
 import './assets/style/style.scss'
 import tabbar from './components/tabBar'
 import swiper from './components/swiper'
+import toast from './components/toast'
 
 Vue.config.productionTip = false
 Vue.config.devtools = true
@@ -17,6 +18,7 @@ Vue.prototype.$axios = axios
 Vue.use(scroller)
 Vue.use(tabbar)
 Vue.use(swiper)
+Vue.use(toast)
 
 new Vue({
   router,
