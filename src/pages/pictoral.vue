@@ -22,6 +22,7 @@
 	import AlloyFinger from 'alloyfinger'
 	import Velocity from 'velocity-animate/velocity.js'
 	import 'velocity-animate/velocity.ui.js'
+	import utils from '../utils'
 	export default{
 		name: 'pictoral',
 		data (){
@@ -42,6 +43,7 @@
 		},
 		mounted: function(){
 			this.bindSlide();
+			document.body.addEventListener("touchmove",utils.prevent);
 		},
 		watch:{
 			activeIndex:function(){
@@ -58,24 +60,23 @@
 			beforeEnter: function (el) {
 		      el.style.opacity = 0
 		      el.style.height = 0
-		      el.style.top = 0
 		    },
 		    enter: function (el, done) {
-		      var delay = el.dataset.index * 100
+		      var delay = el.dataset.index * 50
 		      var top = '';
 		      var width = this.setWidth(el.dataset.index);
 
 		      if(el.dataset.index >= (this.first + 4)){
 		      	top = 15 + "%";
 		      }else{
-		      	top = (4 - (el.dataset.index - this.first))*10 + "%";
+		      	top = (4 - (el.dataset.index - this.first))*8 + "%";
 		      }
 		      setTimeout(function () {
 		        Velocity(
 		          el,
 		          { opacity: 1, 
 		          	height: '80%',
-		          	top:top,
+		          	translateY:top,
 		          	width:width,
 		          	zIndex: 1000 - el.dataset.index
 		          },
@@ -84,6 +85,7 @@
 		      }, delay);
 		    },
 		    leave: function (el, done) {
+		      var delay = el.dataset.index * 10
 		      var self = this;
 		      var top = '';
 		      if(el.dataset.index < this.first){
@@ -96,19 +98,23 @@
 			      }
 		      }
 		      var width = this.setWidth(el.dataset.index);
-		        Velocity(
+		      // setTimeout(function(){
+		      	Velocity(
 		          el,
 		          { 
 		          	width:width,
-		          	top:top
-		          },
-		          { complete: function(){
+		          	translateY:top
+		          },{
+		          	mobileHA:true,
+		          	easing: [ 0.4, 0.01, 0.165, 0.99 ],
+		          	complete: function(){
 			          	if(el.dataset.index == (self.dataList.length - 1)){
 			          		self.stop = false;
 			          	}
 		      	    } 
-		      	  }
+		          }
 		        );
+		      // },0);
 		    },
 			bindSlide: function(){
 				var self = this;
@@ -116,6 +122,10 @@
 				var fl = new AlloyFinger(el,{
 					touchStart: function(evt){
 						self.slideStart = evt.changedTouches[0].clientY;
+					},
+					touchMove: function(evt){
+						var _first = document.querySelectorAll(".pictoral-item")[self.first];
+						_first.style.top = (_first.offsetTop + 10 ) + "px";
 					},
 	   				touchEnd:function (evt) { 
 	   					self.slideEnd = evt.changedTouches[0].clientY;
@@ -125,7 +135,6 @@
 	   						self.third += 1;
 	   						self.forth += 1;
 	   						self.activeIndex++;
-
 	   					}else if(self.slideEnd - self.slideStart < -30){
 	   						if(self.first > 0){
 					       		self.first -= 1;

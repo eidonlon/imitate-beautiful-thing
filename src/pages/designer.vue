@@ -7,27 +7,29 @@
 			<scroller :on-refresh="refresh" :refreshText="refreshText" ref="scroller">
 				<span style="width:20px;height:20px;" class="spinner" slot="refresh-spinner"></span>
 				<div class="designer-time">TODAY</div>
-				<swiper :dataList="navList"  ref="mainSwiper" :swiperOption="swiperOptionMain" >
-					<div slot="swiperMain" slot-scope="slotProps">
-						<div v-for="(item, index) in slotProps.data.dataList" :key="index" class="designer-item" >
-							<div class="designer-img-wrapper" @click="showDetails(item.id)">
-								<img class="designer-item_img" :src="item.img" alt="">
-								<span class="foot-desc_logo" @click="test"><img :src="item.icon" alt=""></span>
-							</div>
-							<div class="designer-item-foot">
-								<div class="foot-desc">
-									<div class="foot-desc_text">
-										<p>{{item.author}}</p>
-										<p class="origin">{{item.origin}}</p>
+				
+					<swiper :dataList="navList"  ref="mainSwiper" :swiperOption="swiperOptionMain" >
+						<div slot="swiperMain" slot-scope="slotProps">
+						<transition-group name="fade">
+							<div v-for="(item, index) in slotProps.data.dataList" :key="index" class="designer-item" >
+								<div class="designer-img-wrapper" @click="showDetails(item.id)">
+									<img class="designer-item_img" :src="item.img" alt="">
+									<span class="foot-desc_logo"><img :src="item.icon" alt=""></span>
+								</div>
+								<div class="designer-item-foot">
+									<div class="foot-desc">
+										<div class="foot-desc_text">
+											<p>{{item.author}} | <span class="origin">{{item.origin}}</span></p>
+										</div>
+									</div>
+									<div class="foot-action">
+										<span @click="showTotast" class="foot-actionr_follow">+ 关注</span>
 									</div>
 								</div>
-								<div class="foot-action">
-									<span @click="showTotast" class="foot-actionr_follow">+ 关注</span>
-								</div>
 							</div>
+						</transition-group>
 						</div>
-					</div>
-				</swiper>
+					</swiper>
 			</scroller>
 		</div>
 	</div>
@@ -108,11 +110,7 @@
 				});
 			},
 			showTotast: function(){
-				// console.log(this.$toast)
-				this.$toast({message:"哈哈哈"});
-			},
-			test: function(){
-				this.$toast({message:"这是一个test."});
+				this.$toast({message:"敬请期待关注功能 :-)"});
 			}
 		}
 	};

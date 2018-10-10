@@ -45,7 +45,7 @@
 		"magnumOpus":"《下十字架》（1435年）、《圣卢克绘制圣母像》、《妇女肖像》、 《最后的审判》",
 		"genre":"文艺复兴",
 		"arts":[
-			{"img":"./static/images/wd01.jpg.jpg',originate:'《让·戈洛的肖像》"},
+			{"img":"./static/images/wd01.jpg.jpg',originate:'《戈洛的肖像》"},
 			{"img":"./static/images/wd02.jpg',originate:'《天使报喜》"},
 			{"img":"./static/images/wd03.jpg',originate:'《女子肖像》"},
 			{"img":"./static/images/wd04.jpg',originate:'《visitation》"}

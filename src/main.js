@@ -14,7 +14,10 @@ import toast from './components/toast'
 Vue.config.productionTip = false
 Vue.config.devtools = true
 
-Vue.prototype.$axios = axios
+Vue.prototype.$axios = axios;
+
+axios.defaults.baseURL = "http://192.168.0.133:8080";
+
 Vue.use(scroller)
 Vue.use(tabbar)
 Vue.use(swiper)

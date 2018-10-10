@@ -9,19 +9,16 @@
 		<div class="personal-main">
 			<div class="personal-main_menu">
 				<ul>
-					<li><i class="fa fa-meh-o"></i><span>我的订单</span></li>
-					<li><i class="fa fa-meh-o"></i><span>购物车</span></li>
-					<li><i class="fa fa-meh-o"></i><span>收货地址</span></li>
+					<li><i class="fa fa-meh-o"></i><span>我推荐的</span></li>
+					<li><i class="fa fa-meh-o"></i><span>我关注的</span></li>
+					<li><i class="fa fa-meh-o"></i><span>我的作品</span></li>
 				</ul>
 			</div>
 			<div class="personal-main_list">
 				<ul>
 					<li><i class="fa fa-meh-o"></i><span>我的订单</span><i class="fa fa-angle-right"></i></li>
 					<li><i class="fa fa-meh-o"></i><span>我的订单</span><i class="fa fa-angle-right"></i></li>
-					<li><i class="fa fa-meh-o"></i><span>我的订单</span><i class="fa fa-angle-right"></i></li>
-					<li><i class="fa fa-meh-o"></i><span>我的订单</span><i class="fa fa-angle-right"></i></li>
-					<li><i class="fa fa-meh-o"></i><span>我的订单</span><i class="fa fa-angle-right"></i></li>
-					<li><i class="fa fa-meh-o"></i><span>我的订单</span><i class="fa fa-angle-right"></i></li>
+					<li><i class="fa fa-meh-o"></i><span>关于</span><i class="fa fa-angle-right"></i></li>
 				</ul>
 			</div>
 		</div>
@@ -34,6 +31,9 @@
 			return{
 				desc:'this is personal page'
 			}
+		},
+		mounted(){
+			document.body.removeEventListener("touchmove",utils.prevent);
 		},
 	    methods: {
 

@@ -3,11 +3,11 @@ import Router from 'vue-router'
 
 import pageView from '@/pages/pageView'
 import Home from '@/pages/home'
-import Things from '@/pages/things'
+// import Things from '@/pages/things'
 import Designer from '@/pages/designer'
 import Personal from '@/pages/personal'
 import Pictoral from '@/pages/pictoral'
-import Details from '@/pages/thingsDetails'
+import Details from '@/pages/details'
 
 Router.prototype.goBack = function(){
 	this.isBack = true;
@@ -34,12 +34,12 @@ export default new Router({
                 meta:{index:1},
                 component:Pictoral
               },
-              {
-                path:'/things',
-                name:'things',
-                meta:{index:1},
-                component:Things
-              },
+              // {
+              //   path:'/things',
+              //   name:'things',
+              //   meta:{index:1},
+              //   component:Things
+              // },
               {
                 path:'/designer',
                 name:'designer',
