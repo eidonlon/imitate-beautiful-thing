@@ -2,7 +2,9 @@
 	<div class="home">
 		<tabbar></tabbar>
 		<div class="home-content">
-			<router-view></router-view>
+			<keep-alive>
+				<router-view></router-view>
+			</keep-alive>
 		</div>
 	</div>
 </template>

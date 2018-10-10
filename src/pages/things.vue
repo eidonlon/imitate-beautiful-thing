@@ -1,5 +1,6 @@
 <template>
 	<div class="things">
+		
 		<div class="things-nav">
 			<swiper :dataList="navList" :activeIndex="activeIndex" ref="navSwiper" :swiperOption="swiperOptionNav" ></swiper>
 		</div>
@@ -23,7 +24,7 @@
 									</div>
 								</div>
 								<div class="foot-action">
-									<span class="fa fa-sort-up action-up"></span> | <span class="fa fa-sort-desc action-down"></span>
+									<span @click="like(item)" class="fa fa-meh-o action-up"></span><span  v-show="item.likeNum" class="like">+<i>{{item.likeNum}}</i></span> | <span @click="dislike(item)" class="fa fa-frown-o action-down"></span><span v-show="item.dislikeNum" class="dislike"><i>{{item.dislikeNum}}</i></span>
 								</div>
 							</div>
 						</div>
@@ -55,6 +56,8 @@
 			          	transitionEnd:this.changeNav,
 			        }
 		        },
+		        likeNum:0,
+		        dislikeNum:0,
 		        refreshText:''
 			}
 		},
@@ -107,6 +110,14 @@
 				}).catch(function(error){
 					console.log(error);
 				});
+			},
+			like: function(item){
+				item.likeNum++;
+				this.$toast("感谢你的喜欢 (^.^) ");
+			},
+			dislike: function(item){
+				item.dislikeNum--;
+				this.$toast("我会努力的 : )");
 			}
 		}
 	};

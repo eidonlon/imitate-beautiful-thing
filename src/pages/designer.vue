@@ -7,10 +7,8 @@
 			<scroller :on-refresh="refresh" :refreshText="refreshText" ref="scroller">
 				<span style="width:20px;height:20px;" class="spinner" slot="refresh-spinner"></span>
 				<div class="designer-time">TODAY</div>
-				
 					<swiper :dataList="navList"  ref="mainSwiper" :swiperOption="swiperOptionMain" >
 						<div slot="swiperMain" slot-scope="slotProps">
-						<transition-group name="fade">
 							<div v-for="(item, index) in slotProps.data.dataList" :key="index" class="designer-item" >
 								<div class="designer-img-wrapper" @click="showDetails(item.id)">
 									<img class="designer-item_img" :src="item.img" alt="">
@@ -27,10 +25,12 @@
 									</div>
 								</div>
 							</div>
-						</transition-group>
 						</div>
 					</swiper>
 			</scroller>
+			<div class="designer-to-top" @click="toTop">
+				<i class="fa fa-arrow-up"></i>
+			</div>
 		</div>
 	</div>
 </template>
@@ -62,8 +62,6 @@
 		created(){
 			this.getData();
 		},
-		mounted(){
-		},	
 		methods:{
 			changeView: function(){
 				this.activeIndex = this.$refs.navSwiper.$refs.swiper.swiper.clickedIndex;
@@ -80,9 +78,10 @@
 					setTimeout(function(){
 						if(result.code == 200){
 							self.navList[self.activeIndex].dataList = result.list.concat(self.navList[self.activeIndex].dataList);
+							self.$toast("新增了两条数据.")
 						}
 						done();
-					},500);
+					},600);
 				});
 			},
 			showDetails: function(index){
@@ -111,7 +110,14 @@
 			},
 			showTotast: function(){
 				this.$toast({message:"敬请期待关注功能 :-)"});
+			},
+			toTop:function(){
+				console.log("totop")
+				this.$refs.scroller.scrollTo(0,0,true);
 			}
 		}
 	};
 </script>
+<style>
+	
+</style>

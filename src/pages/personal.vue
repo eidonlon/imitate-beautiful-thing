@@ -18,13 +18,14 @@
 				<ul>
 					<li><i class="fa fa-meh-o"></i><span>我的订单</span><i class="fa fa-angle-right"></i></li>
 					<li><i class="fa fa-meh-o"></i><span>我的订单</span><i class="fa fa-angle-right"></i></li>
-					<li><i class="fa fa-meh-o"></i><span>关于</span><i class="fa fa-angle-right"></i></li>
+					<li @click="toAbout"><i class="fa fa-meh-o"></i><span>关于</span><i class="fa fa-angle-right"></i></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
+	import utils from '../utils'
 	export default{
 		name: 'personal',
 		data (){
@@ -36,7 +37,9 @@
 			document.body.removeEventListener("touchmove",utils.prevent);
 		},
 	    methods: {
-
+	    	toAbout:function(){
+	    		this.$router.push("/about");
+	    	}
 	    }
 	};
 </script>

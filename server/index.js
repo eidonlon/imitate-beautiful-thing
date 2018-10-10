@@ -128,6 +128,8 @@ var router = function(app){
 					if(String(_num).length > 0){
 						list[_num].dataList.push({
 								id:i,
+								likeNum:0,
+								dislikeNum:0,
 								icon:fileData[i].icon,
 								author:fileData[i].title,
 								origin:fileData[i].genre,
@@ -139,6 +141,8 @@ var router = function(app){
 							text:type,
 							dataList:[{
 								id:i,
+								likeNum:0,
+								dislikeNum:0,
 								icon:fileData[i].icon,
 								author:fileData[i].title,
 								origin:fileData[i].genre,
@@ -151,6 +155,8 @@ var router = function(app){
 						text:type,
 						dataList:[{
 							id:i,
+							likeNum:0,
+							dislikeNum:0,
 							icon:fileData[i].icon,
 							author:fileData[i].title,
 							origin:fileData[i].genre,

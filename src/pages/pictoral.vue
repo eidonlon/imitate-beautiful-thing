@@ -124,18 +124,23 @@
 						self.slideStart = evt.changedTouches[0].clientY;
 					},
 					touchMove: function(evt){
-						var _first = document.querySelectorAll(".pictoral-item")[self.first];
-						_first.style.top = (_first.offsetTop + 10 ) + "px";
+						if(evt.deltaY > 0){
+							var _first = document.querySelectorAll(".pictoral-item")[self.first];
+							// _first.style.top = (_first.offsetTop + 10 ) + "px";
+						}else{
+							// var _first = document.querySelectorAll(".pictoral-item")[self.first];
+							// _first.style.top = (_first.offsetTop - 20 ) + "px";
+						}
 					},
 	   				touchEnd:function (evt) { 
 	   					self.slideEnd = evt.changedTouches[0].clientY;
-	   					if(self.slideEnd - self.slideStart > 30){
+	   					if(self.slideEnd - self.slideStart > 20){
 	   						self.first += 1;
 	   						self.second += 1;
 	   						self.third += 1;
 	   						self.forth += 1;
 	   						self.activeIndex++;
-	   					}else if(self.slideEnd - self.slideStart < -30){
+	   					}else if(self.slideEnd - self.slideStart < -20){
 	   						if(self.first > 0){
 					       		self.first -= 1;
 								self.second -= 1;
