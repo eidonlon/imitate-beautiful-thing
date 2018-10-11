@@ -15,7 +15,7 @@ Vue.config.productionTip = false
 Vue.config.devtools = true
 
 Vue.prototype.$axios = axios;
-axios.defaults.baseURL = "http://192.168.0.133:8080";
+// axios.defaults.baseURL = "http://192.168.0.133:8080";
 
 Vue.use(scroller)
 Vue.use(tabbar)

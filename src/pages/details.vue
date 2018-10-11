@@ -49,7 +49,7 @@
 		},
 		mounted(){
 			this.id = this.$route.params.id;
-			// document.body.removeEventListener("touchmove",prevent);
+			document.body.removeEventListener("touchmove",prevent);
 			document.body.addEventListener("touchmove",function(){
 			},{passive: true});
 		},

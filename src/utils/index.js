@@ -5,16 +5,28 @@ export let prevent = function(e){
 export let mixin = {
 	methods:{
 		like: function(item){
-			item.likeNum++;
+			if(item.likeNum){
+				item.likeNum++;
+			}else{
+				this.likeNum++;
+			}
+			
 			this.$toast("感谢你的喜欢 (^.^) ");
 		},
 		dislike: function(item){
-			item.dislikeNum--;
+			if(item.dislikeNum){
+				item.dislikeNum--;
+			}else{
+				this.dislikeNum--;
+			}
 			this.$toast("我会努力的 : )");
 		},
 		showTotast: function(){
 			this.$toast({message:"敬请期待关注功能 :-)"});
 		},
+		goBack: function(){
+			this.$router.goBack();
+		}
 	}
 }
 

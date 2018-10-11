@@ -15,6 +15,7 @@
 					<p>{{data.desc}}</p>
 				</div>
 			</transition-group>
+			<div class="no-more-data"  v-show="noData"><i class="fa fa-hand-o-up"></i><p>没有更多了，试试向上滑动吧！</p></div>
 		</div>
 	</div>
 </template>
@@ -35,7 +36,8 @@
 				slideStart:0,
 				slideEnd:0,
 				activeIndex:0,
-				stop:false
+				stop:false,
+				noData:false
 			}
 		},
 		created: function(){
@@ -48,10 +50,34 @@
 		watch:{
 			activeIndex:function(){
 				var list = document.querySelectorAll(".pictoral-item");
-				if(!this.stop){
 					this.stop = true;
 					for(var i=0;i < list.length;i++){
 						this.leave(list[i]);
+					}
+				if(this.activeIndex == this.dataList.length){
+					this.noData = true;
+				}else{
+					this.noData = false;
+				}
+			},
+			slideEnd: function(){
+				if(!this.stop){
+					if(this.slideEnd - this.slideStart > 20){
+						if(!this.noData){
+							this.first += 1;
+							this.second += 1;
+							this.third += 1;
+							this.forth += 1;
+							this.activeIndex++;
+						}
+					}else if(this.slideEnd - this.slideStart < -20){
+						if(this.first > 0){
+				       		this.first -= 1;
+							this.second -= 1;
+							this.third -= 1;
+							this.forth -= 1;
+							this.activeIndex--;
+						}
 					}
 				}
 			}
@@ -85,9 +111,11 @@
 		      }, delay);
 		    },
 		    leave: function (el, done) {
-		      var delay = el.dataset.index * 10
 		      var self = this;
 		      var top = '';
+		      var delay = el.dataset.index * 10;
+		      var width = this.setWidth(el.dataset.index);
+
 		      if(el.dataset.index < this.first){
 		      	top = "99%";
 		      }else{
@@ -97,8 +125,6 @@
 			      	top = (4 - (el.dataset.index - this.first))*10 + "%";
 			      }
 		      }
-		      var width = this.setWidth(el.dataset.index);
-		      // setTimeout(function(){
 		      	Velocity(
 		          el,
 		          { 
@@ -114,7 +140,6 @@
 		      	    } 
 		          }
 		        );
-		      // },0);
 		    },
 			bindSlide: function(){
 				var self = this;
@@ -124,48 +149,17 @@
 						self.slideStart = evt.changedTouches[0].clientY;
 					},
 					touchMove: function(evt){
-						if(evt.deltaY > 0){
-							var _first = document.querySelectorAll(".pictoral-item")[self.first];
-							// _first.style.top = (_first.offsetTop + 10 ) + "px";
-						}else{
-							// var _first = document.querySelectorAll(".pictoral-item")[self.first];
-							// _first.style.top = (_first.offsetTop - 20 ) + "px";
-						}
+						self.slideEnd = evt.changedTouches[0].clientY;
 					},
 	   				touchEnd:function (evt) { 
 	   					self.slideEnd = evt.changedTouches[0].clientY;
-	   					if(self.slideEnd - self.slideStart > 20){
-	   						self.first += 1;
-	   						self.second += 1;
-	   						self.third += 1;
-	   						self.forth += 1;
-	   						self.activeIndex++;
-	   					}else if(self.slideEnd - self.slideStart < -20){
-	   						if(self.first > 0){
-					       		self.first -= 1;
-								self.second -= 1;
-								self.third -= 1;
-								self.forth -= 1;
-	   							self.activeIndex--;
-							}
-	   					}
 	   				}
 				});
 			},
 			setWidth: function(index){
-				var width = '';
-				if(index == this.first){
-					width = '76%';
-				}else if(index == this.second){
-					width = '68%';
-				}else if(index == this.third){
-					width = '56%';
-				}else if(index == this.forth){
-					width = '40%';
-				}else{
-					width = '40%';
-				}
-				return width;
+				return index == this.first   ? '76%' :
+					   index == this.second  ? '68%' :
+					   index == this.third   ? '56%' : '40%';
 			}, 
 			getData: function(){
 				var self = this;

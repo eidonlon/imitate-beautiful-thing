@@ -13,7 +13,7 @@
 				</swiper>
 			</div>
 			<div class="comment-act">
-				<span @click="like" class="fa fa-meh-o action-up"></span><span  v-show="likeNum" class="like">+<i>{{likeNum}}</i></span> || <span @click="dislike" class="fa fa-frown-o action-down"></span><span v-show="dislikeNum" class="dislike"><i>{{dislikeNum}}</i></span>
+				<span @click="like" class="fa fa-meh-o action-up"></span><span  v-show="likeNum" class="like"><i>+{{likeNum}}</i></span> || <span @click="dislike" class="fa fa-frown-o action-down"></span><span v-show="dislikeNum" class="dislike"><i>{{dislikeNum}}</i></span>
 			</div>
 			<div class="comment-desc">
 				<div class="desc-item" v-for="(item, index) in descList" :key="index">
@@ -37,7 +37,7 @@
 				</div>
 			</div>
 			<div class="comment-list">
-				<span class="comment-list-tips">评论</span>
+				<span class="comment-list-tips">评论({{cNum}})</span>
 				<div class="list">
 					<ul>
 						<li v-for="(item,index) in commentList" :key="index">
@@ -97,12 +97,13 @@
 					{icon:'./static/images/logo.jpg',name:'路人甲',time:'2018-10-01 12:12:12',content:'啊哈哈或或或或或或或或或或或或或或或或或或或或或或或或或或啊'},
 					{icon:'./static/images/logo.jpg',name:'路人甲',time:'2018-10-01 12:12:12',content:'啊哈哈或或或或或或或或或或或或或或或或或或或或或或或或或或啊'},
 				],
+				cNum:3,
 				sendMsg:'',
 				showNew:false,
 				relative:false
 			}
 		},
-		mixin:[mixin],
+		mixins:[mixin],
 		created(){
 			this.id = this.$route.params.id;
 			this.loadData();
@@ -120,9 +121,6 @@
 			}
 		},
 		methods:{
-			goBack: function(){
-				this.$router.goBack();
-			},
 			loadData: function(cb){
 				var self = this;
 				this.$axios.post("/designer",{id:self.id}).then(function(response){
@@ -141,22 +139,12 @@
 					console.log(error);
 				});
 			},
-			// like: function(item){
-			// 	item.likeNum++;
-			// 	this.$toast("感谢你的喜欢 (^.^) ");
-			// },
-			// dislike: function(item){
-			// 	item.dislikeNum--;
-			// 	this.$toast("我会努力的 : )");
-			// },
-			// showTotast: function(){
-			// 	this.$toast({message:"敬请期待关注功能 :-)"});
-			// },
 			send: function(){
 				if(this.sendMsg){
 					this.commentList.unshift({
 						icon:'./static/images/logo.jpg',name:'路人乙',time:'刚刚',content:this.sendMsg
 					});
+					this.cNum ++;
 					this.showNew = true;
 					this.sendMsg = '';
 				}

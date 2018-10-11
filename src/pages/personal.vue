@@ -30,7 +30,6 @@
 		name: 'personal',
 		data (){
 			return{
-				desc:'this is personal page'
 			}
 		},
 		mounted(){
