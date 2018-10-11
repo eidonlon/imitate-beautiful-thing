@@ -8,6 +8,7 @@ import Designer from '@/pages/designer'
 import Personal from '@/pages/personal'
 import Pictoral from '@/pages/pictoral'
 import Details from '@/pages/details'
+import Comment from '@/pages/comment'
 import About from '@/pages/about'
 
 Router.prototype.goBack = function(){
@@ -60,6 +61,12 @@ export default new Router({
           name:'details',
           meta:{index:2},
           component:Details
+        },
+        {
+          path:'/comment/:id',
+          name:'comment',
+          meta:{index:2},
+          component:Comment
         },
         {
           path:'/about',

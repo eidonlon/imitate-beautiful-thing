@@ -6,6 +6,7 @@
 			  	  			:class="{active: activeIndex == index}">
 				<slot name="swiperMain" :data="data">{{data.text}}</slot> 	
 			</swiper-slide>
+			<div class="swiper-pagination" slot="pagination"></div>
 		</swiper>
 	</div>
 </template>

@@ -25,7 +25,7 @@
 	</div>
 </template>
 <script>
-	import utils from '../utils'
+	import {prevent} from '../utils'
 	export default{
 		name: 'personal',
 		data (){
@@ -34,7 +34,7 @@
 			}
 		},
 		mounted(){
-			document.body.removeEventListener("touchmove",utils.prevent);
+			document.body.removeEventListener("touchmove",prevent);
 		},
 	    methods: {
 	    	toAbout:function(){

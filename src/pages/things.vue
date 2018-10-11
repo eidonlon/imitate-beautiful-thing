@@ -31,6 +31,9 @@
 					</div>
 				</swiper>
 			</scroller>
+			<div class="to-top" @click="toTop">
+				<i class="fa fa-arrow-up"></i>
+			</div>
 		</div>
 	</div>
 </template>
@@ -82,13 +85,14 @@
 					setTimeout(function(){
 						if(result.code == 200){
 							self.navList[self.activeIndex].dataList = result.list.concat(self.navList[self.activeIndex].dataList);
+							self.$toast("新增了两条数据.");
 						}
 						done();
 					},500);
 				});
 			},
 			showDetails: function(index){
-				this.$router.push("/details/"+index);
+				this.$router.push("/comment/"+index);
 			},
 			getData: function(cb){
 				var self = this;
@@ -118,6 +122,9 @@
 			dislike: function(item){
 				item.dislikeNum--;
 				this.$toast("我会努力的 : )");
+			},
+			toTop:function(){
+				this.$refs.scroller.scrollTo(0,0,true);
 			}
 		}
 	};

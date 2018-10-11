@@ -22,7 +22,7 @@
 	import AlloyFinger from 'alloyfinger'
 	import Velocity from 'velocity-animate/velocity.js'
 	import 'velocity-animate/velocity.ui.js'
-	import utils from '../utils'
+	import {prevent} from '../utils'
 	export default{
 		name: 'pictoral',
 		data (){
@@ -43,7 +43,7 @@
 		},
 		mounted: function(){
 			this.bindSlide();
-			document.body.addEventListener("touchmove",utils.prevent);
+			document.body.addEventListener("touchmove",prevent);
 		},
 		watch:{
 			activeIndex:function(){
@@ -58,11 +58,11 @@
 		},
 		methods:{
 			beforeEnter: function (el) {
-		      el.style.opacity = 0
-		      el.style.height = 0
+		      el.style.opacity = 0;
+		      el.style.height = 0;
 		    },
 		    enter: function (el, done) {
-		      var delay = el.dataset.index * 50
+		      var delay = el.dataset.index * 50;
 		      var top = '';
 		      var width = this.setWidth(el.dataset.index);
 

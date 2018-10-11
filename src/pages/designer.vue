@@ -28,7 +28,7 @@
 						</div>
 					</swiper>
 			</scroller>
-			<div class="designer-to-top" @click="toTop">
+			<div class="to-top" @click="toTop">
 				<i class="fa fa-arrow-up"></i>
 			</div>
 		</div>
@@ -78,7 +78,7 @@
 					setTimeout(function(){
 						if(result.code == 200){
 							self.navList[self.activeIndex].dataList = result.list.concat(self.navList[self.activeIndex].dataList);
-							self.$toast("新增了两条数据.")
+							self.$toast("新增了两条数据.");
 						}
 						done();
 					},600);
@@ -112,7 +112,6 @@
 				this.$toast({message:"敬请期待关注功能 :-)"});
 			},
 			toTop:function(){
-				console.log("totop")
 				this.$refs.scroller.scrollTo(0,0,true);
 			}
 		}
