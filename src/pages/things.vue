@@ -1,14 +1,17 @@
 <template>
 	<div class="things">
-		
 		<div class="things-nav">
 			<swiper :dataList="navList" :activeIndex="activeIndex" ref="navSwiper" :swiperOption="swiperOptionNav" ></swiper>
 		</div>
 		<div class="things-main">
-			<scroller :on-refresh="refresh" :refreshText="refreshText" ref="scroller">
+			<scroller 
+				:on-refresh="refresh" 
+				:refreshText="refreshText" ref="scroller">
 				<span style="width:20px;height:20px;" class="spinner" slot="refresh-spinner"></span>
 				<div class="things-time">TODAY</div>
-				<swiper :dataList="navList"  ref="mainSwiper" :swiperOption="swiperOptionMain" >
+				<swiper 
+					:dataList="navList"  
+					:swiperOption="swiperOptionMain"  ref="mainSwiper">
 					<div slot="swiperMain" slot-scope="slotProps">
 						<div v-for="(item, index) in slotProps.data.dataList" :key="index" class="things-item" >
 							<div class="things-img-wrapper" @click="showDetails(item.id)">
@@ -31,66 +34,22 @@
 					</div>
 				</swiper>
 			</scroller>
-			<div class="to-top" @click="toTop">
-				<i class="fa fa-arrow-up"></i>
-			</div>
+			<div class="to-top" @click="toTop"><i class="fa fa-arrow-up"></i></div>
 		</div>
 	</div>
 </template>
 <script>
+	import { mixin,pageAct } from '../utils'
 	export default{
-		name: 'designer',
+		name: 'things',
 		data (){
 			return{
-				activeIndex:0,
-				navList:[],
-				author:'',
-				swiperOptionNav: {
-				  free:true,
-		          slidesPerView: 4,
-		          slideToClickedSlide: true,
-		          on:{
-		          	tap:this.changeView
-		          }
-		        },
-		        swiperOptionMain:{
-		        	autoHeight:true,
-		        	on:{
-			          	transitionEnd:this.changeNav,
-			        }
-		        },
 		        likeNum:0,
 		        dislikeNum:0,
-		        refreshText:''
 			}
 		},
-		created(){
-			this.getData();
-		},
-		mounted(){
-		},	
+		mixins:[mixin,pageAct],
 		methods:{
-			changeView: function(){
-				this.activeIndex = this.$refs.navSwiper.$refs.swiper.swiper.clickedIndex;
-				this.$refs.mainSwiper.$refs.swiper.swiper.slideTo(this.activeIndex,1000,false);
-			},
-			changeNav: function(){
-				let index = this.$refs.mainSwiper.$refs.swiper.swiper.activeIndex;
-				this.$refs.navSwiper.$refs.swiper.swiper.slideTo(index,1000,false);
-				this.activeIndex = this.$refs.mainSwiper.$refs.swiper.swiper.activeIndex;
-			},
-			refresh: function(done){
-				var self = this;
-				this.loadMore(function(result){
-					setTimeout(function(){
-						if(result.code == 200){
-							self.navList[self.activeIndex].dataList = result.list.concat(self.navList[self.activeIndex].dataList);
-							self.$toast("新增了两条数据.");
-						}
-						done();
-					},500);
-				});
-			},
 			showDetails: function(index){
 				this.$router.push("/comment/"+index);
 			},
@@ -114,17 +73,6 @@
 				}).catch(function(error){
 					console.log(error);
 				});
-			},
-			like: function(item){
-				item.likeNum++;
-				this.$toast("感谢你的喜欢 (^.^) ");
-			},
-			dislike: function(item){
-				item.dislikeNum--;
-				this.$toast("我会努力的 : )");
-			},
-			toTop:function(){
-				this.$refs.scroller.scrollTo(0,0,true);
 			}
 		}
 	};

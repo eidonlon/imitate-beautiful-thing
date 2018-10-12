@@ -6,7 +6,8 @@
 				    v-on:before-enter="beforeEnter"
 				    v-on:enter="enter"
    					v-on:leave="leave">
-				<div v-for="(data, index) in dataList" :key="index" class="pictoral-item"  
+				<div v-for="(data, index) in dataList" class="pictoral-item"  
+					:key="index"  
 					:data-index="index" >
 					<span class="pictoral-item_logo"><img :src="data.icon" alt=""></span>
 					<h6>{{data.title}}</h6>

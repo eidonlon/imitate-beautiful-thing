@@ -13,7 +13,8 @@
 				</swiper>
 			</div>
 			<div class="comment-act">
-				<span @click="like" class="fa fa-meh-o action-up"></span><span  v-show="likeNum" class="like"><i>+{{likeNum}}</i></span> || <span @click="dislike" class="fa fa-frown-o action-down"></span><span v-show="dislikeNum" class="dislike"><i>{{dislikeNum}}</i></span>
+				<span @click="like" class="fa fa-meh-o action-up"></span><span  v-show="likeNum" class="comment-act__like"><i>+{{likeNum}}</i></span> || 
+				<span @click="dislike" class="fa fa-frown-o action-down"></span><span v-show="dislikeNum" class="comment-act__dislike"><i>{{dislikeNum}}</i></span>
 			</div>
 			<div class="comment-desc">
 				<div class="desc-item" v-for="(item, index) in descList" :key="index">
@@ -51,9 +52,9 @@
 					</ul>
 				</div>
 				<p class="page-footer">—— 没有了呢 ——</p>
-			</div>
+			</div>		
 		</div>
-		<div class="comment-area" :style="{position: relative ? 'relative' : ''}">
+		<div class="comment-area" >
 			<span class="icon"><img :src="icon" alt=""></span>
 			<input class="send-input" type="text" placeholder="留下爪印" v-model="sendMsg" @focus="setPosition">
 			<input type="button" class="send-btn" value="评论" @click="send">
@@ -69,6 +70,7 @@
 	import  {prevent,mixin}  from '../utils'
 	export default{
 		name: 'comment-details',
+		mixins:[mixin],
 		data() {
 			return {
 				id:'',
@@ -93,17 +95,15 @@
 				],
 				imgList:[],
 				commentList:[
-					{icon:'./static/images/logo.jpg',name:'路人甲',time:'2018-10-01 12:12:12',content:'啊哈哈或或或或或或或或或或或或或或或或或或或或或或或或或或啊'},
-					{icon:'./static/images/logo.jpg',name:'路人甲',time:'2018-10-01 12:12:12',content:'啊哈哈或或或或或或或或或或或或或或或或或或或或或或或或或或啊'},
-					{icon:'./static/images/logo.jpg',name:'路人甲',time:'2018-10-01 12:12:12',content:'啊哈哈或或或或或或或或或或或或或或或或或或或或或或或或或或啊'},
+					{icon:'./static/images/logo.jpg',name:'路人甲',time:'2018-10-01 12:12:12',content:'这是一条评论'},
+					{icon:'./static/images/logo.jpg',name:'路人甲',time:'2018-10-01 12:12:12',content:'这是另外一条评论'},
+					{icon:'./static/images/logo.jpg',name:'路人甲',time:'2018-10-01 12:12:12',content:'这是一条长长长长长长长长长长长长长长长长长长长长长长长长长长长的评论'},
 				],
 				cNum:3,
 				sendMsg:'',
-				showNew:false,
-				relative:false
+				showNew:false
 			}
 		},
-		mixins:[mixin],
 		created(){
 			this.id = this.$route.params.id;
 			this.loadData();

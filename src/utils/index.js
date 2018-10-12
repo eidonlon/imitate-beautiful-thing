@@ -28,5 +28,66 @@ export let mixin = {
 			this.$router.goBack();
 		}
 	}
-}
+};
 
+export let goBack = {
+	methods:{
+		goBack: function(){
+			this.$router.goBack();
+		},
+	}
+};
+
+export let pageAct = {
+	data(){
+		return {
+			activeIndex:0,
+			navList:[],
+			author:'',
+			swiperOptionNav: {
+			  free:true,
+	          slidesPerView: 4,
+	          slideToClickedSlide: true,
+	          on:{
+	          	tap:this.changeView
+	          }
+	        },
+	        swiperOptionMain:{
+	        	autoHeight:true,
+	        	on:{
+		          	transitionEnd:this.changeNav,
+		        }
+	        },
+	        refreshText:''
+		}
+	},
+	created(){
+		this.getData();
+	},
+	methods:{
+		changeView: function(){
+			this.activeIndex = this.$refs.navSwiper.$refs.swiper.swiper.clickedIndex;
+			this.$refs.mainSwiper.$refs.swiper.swiper.slideTo(this.activeIndex,1000,false);
+		},
+		changeNav: function(){
+			let index = this.$refs.mainSwiper.$refs.swiper.swiper.activeIndex;
+			this.$refs.navSwiper.$refs.swiper.swiper.slideTo(index,1000,false);
+			this.activeIndex = this.$refs.mainSwiper.$refs.swiper.swiper.activeIndex;
+		},
+		refresh: function(done){
+			var self = this;
+			this.loadMore(function(result){
+				setTimeout(function(){
+					if(result.code == 200){
+						self.navList[self.activeIndex].dataList = result.list.concat(self.navList[self.activeIndex].dataList);
+						self.$toast("新增了两条数据.");
+					}
+					done();
+				},600);
+			});
+		},
+		toTop:function(){
+			this.$refs.scroller.scrollTo(0,0,true);
+		}
+	}
+};

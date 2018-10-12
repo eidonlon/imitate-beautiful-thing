@@ -27,9 +27,10 @@
 	</div>
 </template>
 <script>
-	import {prevent} from '../utils/index.js'
+	import {prevent,goBack} from '../utils/index.js'
 	export default{
 		name: 'thing-details',
+		mixins:[goBack],
 		data() {
 			return {
 				id:'',
@@ -54,9 +55,6 @@
 			},{passive: true});
 		},
 		methods:{
-			goBack: function(){
-				this.$router.goBack();
-			},
 			loadMore: function(cb){
 				var self = this;
 				this.$axios.post("/designer",{id:self.id}).then(function(response){

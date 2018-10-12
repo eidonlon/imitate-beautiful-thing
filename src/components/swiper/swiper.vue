@@ -2,8 +2,8 @@
 	<div class="swiper-box">
 		<swiper :options="swiperOption" ref="swiper" >
 			<swiper-slide v-for="(data, index) in dataList" 
-			  	  			:key="index"
-			  	  			:class="{active: activeIndex == index}">
+		  	  			  :key="index"
+		  	  			  :class="{active: activeIndex == index}">
 				<slot name="swiperMain" :data="data">{{data.text}}</slot> 	
 			</swiper-slide>
 			<div class="swiper-pagination" slot="pagination"></div>

@@ -17,15 +17,14 @@ plugin.install = function(Vue, options ={}){
         var duration = option.duration || options.duration || 2500;
 		if(!toaster){
 			toaster = new vueToast().$mount(document.createElement("div"));
-			console.log(toaster)
-       		 document.body.appendChild(toaster.$el);
+       		document.body.appendChild(toaster.$el);
 		}
 		toaster.message = typeof option === 'string' ? option : option.message;
 		toaster.show();
         setTimeout(function () {
             toaster.close()
-        }, duration)
+        }, duration);
 	}
 }
 
-export default plugin 
+export default plugin;

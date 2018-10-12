@@ -13,13 +13,8 @@
 				transitionName:'slide-left'
 			}
 		},
-		mounted(){
-			console.log(this.$router)
-			console.log(this.$route)
-		},	
 		watch:{
 			$route: function(to,from){
-				console.log(to.meta.index);
 				let isBack = this.$router.isBack;
 				if(isBack){
 					this.transitionName = 'slide-right';

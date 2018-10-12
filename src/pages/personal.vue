@@ -28,10 +28,6 @@
 	import {prevent} from '../utils'
 	export default{
 		name: 'personal',
-		data (){
-			return{
-			}
-		},
 		mounted(){
 			document.body.removeEventListener("touchmove",prevent);
 		},

@@ -5,7 +5,7 @@
 			<h3>关于</h3>	
 		</div>
 		<div class="main">
-			<p>声明：这只是一个练习的demo :-) .</p>
+			<p>声明：这只是一个练习的demo :( </p>
 		</div>
 	</div>
 </template>
@@ -14,15 +14,13 @@
 		name: '',
 		data (){
 			return{
-				desc:'this is personal page'
+				desc:''
 			}
-		},
-		mounted(){
 		},
 	    methods: {
 	    	goBack: function(){	
 				this.$router.goBack();	
-			},
+			}
 	    }
 	};
 </script>
