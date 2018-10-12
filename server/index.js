@@ -40,45 +40,33 @@ var router = function(app){
 	});
 
 	app.post("/designer",function(req,res){
-		var _random = Math.floor(Math.random()*4);
-		var author = req.body.author;
-		var id = req.body.id;
-		var list = [];
-		var data = [];
+		var _random = Math.floor(Math.random()*4),
+			author = req.body.author,
+			id = req.body.id,
+			list = [],
+			data = [],
+			_num = '';
+
 		if(fileData){
 			for(var i in fileData){
 				var type = fileData[i].title.split("/")[1];
-				var _num = '';
-
-				if(list.length){
-					var _index = list.forEach(function(val,index){
-						if(type == val.text){
-							_num = index;
-							return index;
-						}
-					});
-					if(String(_num).length > 0){
-						list[_num].dataList.push({
-								id:i,
-								icon:fileData[i].icon,
-								author:fileData[i].title.split("/")[0],
-								origin:fileData[i].genre,
-								img:fileData[i].arts[_random].img
-							}
-						);
-					}else{
-						list.push({
-							text:type,
-							portrait:fileData[i].portrait,
-							dataList:[{
-								id:i,
-								icon:fileData[i].icon,
-								author:fileData[i].title.split("/")[0],
-								origin:fileData[i].genre,
-								img:fileData[i].arts[_random].img
-							}]
-						});
+				
+				list.map(function(val,index){
+					if(type == val.text){
+						_num = index;
+						return;
 					}
+				});
+
+				if(String(_num).length > 0){
+					list[_num].dataList.push({
+							id:i,
+							icon:fileData[i].icon,
+							author:fileData[i].title.split("/")[0],
+							origin:fileData[i].genre,
+							img:fileData[i].arts[_random].img
+						}
+					);
 				}else{
 					list.push({
 						text:type,
@@ -92,6 +80,7 @@ var router = function(app){
 						}]
 					});
 				}
+
 				data = list;
 			}
 
