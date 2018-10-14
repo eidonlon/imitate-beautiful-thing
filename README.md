@@ -22,7 +22,7 @@ vue2 + vue-router + axios + webpack + express
 git clone https://github.com/eidonlon/imitate-beautiful-thing.git
 
 #进入文件夹
-cd imitate-One
+cd imitate-beautiful-thing
 
 #安装依赖
 npm install
@@ -72,7 +72,7 @@ npm run build
 
 ![read](https://github.com/eidonlon/imitate-beautiful-thing/blob/master/static/images/05.jpg)
 
-**都看到这里，给个star 吧。**
+**看到这里，给个star 吧。**
 
 
 ## Build Setup
@@ -89,15 +89,5 @@ npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
 
 
