@@ -1,9 +1,11 @@
 # imitate-beautiful-thing
 Using Vue to imitate a app.
 
-## imitate-beautiful-thing
-
 简介:这是一个使用vue全家桶做的一个app demo,纯粹学习而已。
+
+
+##### 移动端扫描下方二维码看效果
+![二维码](https://github.com/eidonlon/imitate-beautiful-thing/blob/master/static/images/link.png)
 
 ## 用到的技术
 
@@ -41,11 +43,9 @@ npm run build
 
 效果gif:
 
-![二维码](https://github.com/eidonlon/imitate-beautiful-thing/blob/master/static/images/demo.gif)
+![效果](https://github.com/eidonlon/imitate-beautiful-thing/blob/master/static/images/demo.gif)
 
 
-##### 移动端扫描下方二维码
-![二维码](https://github.com/eidonlon/imitate-beautiful-thing/blob/master/static/images/link.png)
 
 ## 部分截图
 
