@@ -18,7 +18,7 @@ Router.prototype.goBack = function(){
 
 Vue.use(Router);
 
-export default new Router({
+const routers = new Router({
   routes: [
     {
       path:'',
@@ -78,3 +78,10 @@ export default new Router({
     }
   ]
 })
+
+routers.beforeEach(function (to, from, next) { 
+    document.body.scrollTop = document.documentElement.scrollTop = 0
+    next()
+});
+
+export default routers;

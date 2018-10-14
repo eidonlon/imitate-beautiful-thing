@@ -37,9 +37,9 @@
 				title:'',
 				img:'',
 				descList:[
-					{icon:'fa-meh-o',tips:"派系",text:''},
-					{icon:'fa-meh-o',tips:"代表作",text:''},
-					{icon:'fa-meh-o',tips:"简介",text:''}
+					{icon:'fa-paint-brush',tips:"派系",text:''},
+					{icon:'fa-map-o',tips:"代表作",text:''},
+					{icon:'fa-newspaper-o',tips:"简介",text:''}
 				],
 				imgList:[]
 			}

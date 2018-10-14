@@ -22,7 +22,7 @@
 					this.transitionName = 'slide-left';
 				}
 				this.$router.isBack = false;
-			}
+			},
 		}
 	}
 </script>

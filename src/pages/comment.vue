@@ -33,8 +33,8 @@
 					<img :src="wordImg" alt="">
 				</div>
 				<div class="word">
-					<h4>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</h4>
-					<p>咳咳咳咳咳咳咳咳咳咳</p>
+					<h4>我同疯子的唯一区别，在于我不是疯子。我同人类的唯一区别，在于我是疯子</h4>
+					<p>——达利</p>
 				</div>
 			</div>
 			<div class="comment-list">
@@ -90,8 +90,8 @@
 				},
 				designer:'',
 				descList:[
-					{icon:'fa-meh-o',tips:"派系",text:''},
-					{icon:'fa-meh-o',tips:"代表作",text:''}
+					{icon:'fa-paint-brush',tips:"派系",text:''},
+					{icon:'fa-map-o',tips:"代表作",text:''}
 				],
 				imgList:[],
 				commentList:[

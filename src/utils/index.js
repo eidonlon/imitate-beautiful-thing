@@ -5,7 +5,7 @@ export let prevent = function(e){
 export let mixin = {
 	methods:{
 		like: function(item){
-			if(item.likeNum){
+			if(item.likeNum || item.likeNum === 0){
 				item.likeNum++;
 			}else{
 				this.likeNum++;
@@ -14,7 +14,7 @@ export let mixin = {
 			this.$toast("感谢你的喜欢 (^.^) ");
 		},
 		dislike: function(item){
-			if(item.dislikeNum){
+			if(item.dislikeNum || item.dislikeNum === 0){
 				item.dislikeNum--;
 			}else{
 				this.dislikeNum--;

@@ -4,10 +4,11 @@
 			<swiper :dataList="navList" :activeIndex="activeIndex" ref="navSwiper" :swiperOption="swiperOptionNav" ></swiper>
 		</div>
 		<div class="designer-main">
+			<keep-alive>
 			<scroller :on-refresh="refresh" :refreshText="refreshText" ref="scroller">
 				<span style="width:20px;height:20px;" class="spinner" slot="refresh-spinner"></span>
 				<div class="designer-time">TODAY</div>
-					<swiper :dataList="navList"  ref="mainSwiper" :swiperOption="swiperOptionMain" >
+					<swiper :dataList="navList"  ref="mainSwiper" :swiperOption="swiperOptionMain">
 						<div slot="swiperMain" slot-scope="slotProps">
 							<div v-for="(item, index) in slotProps.data.dataList" :key="index" class="designer-item" >
 								<div class="designer-img-wrapper" @click="showDetails(item.id)">
@@ -28,6 +29,7 @@
 						</div>
 					</swiper>
 			</scroller>
+		</keep-alive>
 			<div class="to-top" @click="toTop">
 				<i class="fa fa-arrow-up"></i>
 			</div>
